@@ -153,6 +153,12 @@ int dealerHandValue() {
   return total;
 }
 
+void clearScreen() {
+  for (int i = 0; i < 50; i++) {
+    std::cout << "\n" << std::endl;
+  }
+}
+
 int main() {
   using namespace std;
   srand(time(NULL));
@@ -579,22 +585,26 @@ int main() {
 
   int draw, Ace, highScore, aceValue, playerScore, dealerScore;
   bool win = true;
-  cout << "Game begin!" << endl;
+  char drawCard;
   shuffle();
   // player's turn
   while (1) {
-    playerScore = 0;
-    char drawCard;
+    playerScore = playerHandValue();
+    clearScreen();
+    showPlayerHand();
+    cout << "Player Score: " << playerScore << endl;
     cout << "Would you like to draw a card? [y/n]" << endl;
     cin >> drawCard;
     if (drawCard == 'y') {
       draw = rand() % deck.size() + 0;
       // draw = 50;    // testing Aces
       playerHand.push_back(deck[draw]);
-      showPlayerHand();
       if (deck[draw].fluidValue == true) {
         aceValue = 0;
         while (aceValue != 1 && aceValue != 11) {
+          clearScreen();
+          showPlayerHand();
+          cout << "Player Score: " << playerScore << endl;
           cout << "How would you like this Ace to be scored? [1/11] ... please "
                   "don't enter a letter, this program will break and I will cry"
                << endl;
@@ -613,15 +623,15 @@ int main() {
     }
     playerScore = playerHandValue();
     if (playerScore > 21) {
-      cout << "Player Score: " << playerScore << " ... Over 21!" << endl;
       playerScore = 0;
-      win = false;
       break;
     }
     if (playerHand.size() == 5) {
       cout << "You drew 5 cards without breaking, you win!" << endl;
       break;
     }
+    clearScreen();
+    showPlayerHand();
     cout << "Player score: " << playerScore << endl;
   }
   // dealer's turn
@@ -639,6 +649,7 @@ int main() {
       break;
     }
   }
+  clearScreen();
   cout << "############################" << endl;
   cout << "END GAME" << endl;
   cout << "############################" << endl;
