@@ -583,12 +583,18 @@ int main() {
   ace4.graphicBottom = "|◇     ◇|";
   ace4.bottomEdge = "---------";
 
-  int draw, Ace, highScore, aceValue, playerScore, dealerScore;
-  bool win = true;
+  int draw, Ace, highScore, aceValueNum, playerScore, dealerScore;
+  // string aceValue;
   char drawCard;
+  bool player21 = false;
+  bool playerBreak = false;
+  bool player5 = false;
+  bool dealerBreak = false;
+  bool dealer5 = false;
   shuffle();
   // player's turn
   while (1) {
+    string aceValue = "y";
     playerScore = playerHandValue();
     clearScreen();
     showPlayerHand();
@@ -596,12 +602,11 @@ int main() {
     cout << "Would you like to draw a card? [y/n]" << endl;
     cin >> drawCard;
     if (drawCard == 'y') {
-      draw = rand() % deck.size() + 0;
-      // draw = 50;    // testing Aces
+      // draw = rand() % deck.size() + 0;
+      draw = 48; // testing Aces
       playerHand.push_back(deck[draw]);
       if (deck[draw].fluidValue == true) {
-        aceValue = 0;
-        while (aceValue != 1 && aceValue != 11) {
+        while (aceValue != "1" && aceValue != "11") {
           clearScreen();
           showPlayerHand();
           cout << "Player Score: " << playerScore << endl;
@@ -609,25 +614,31 @@ int main() {
                   "don't enter a letter, this program will break and I will cry"
                << endl;
           cin >> aceValue;
+          if (aceValue == "1") {
+            aceValueNum = 1;
+          } else if (aceValue == "11") {
+            aceValueNum = 11;
+          }
         }
-        playerHand[playerHand.size() - 1].value = aceValue;
+        playerHand[playerHand.size() - 1].value = aceValueNum;
       }
-      deck.erase(deck.begin() + draw);
+      deck.erase(deck.begin() + draw - 1);
     }
     if (drawCard == 'n') {
       playerScore = playerHandValue();
       if (playerScore == 21) {
-        cout << "You got 21, the highest possible score!" << endl;
+        player21 = true;
       }
       break;
     }
     playerScore = playerHandValue();
     if (playerScore > 21) {
+      playerBreak = true;
       playerScore = 0;
       break;
     }
     if (playerHand.size() == 5) {
-      cout << "You drew 5 cards without breaking, you win!" << endl;
+      player5 = true;
       break;
     }
     clearScreen();
@@ -641,8 +652,12 @@ int main() {
     dealerHand.push_back(deck[draw]);
     dealerScore = dealerHandValue();
     if (dealerScore > 21) {
-      cout << "Dealer broke with: " << dealerScore << endl;
+      dealerBreak = true;
       dealerScore = 0;
+      break;
+    }
+    if (dealerHand.size() == 5) {
+      dealer5 = true;
       break;
     }
     if (dealerScore > 16) {
@@ -654,14 +669,33 @@ int main() {
   cout << "END GAME" << endl;
   cout << "############################" << endl;
   showDealerHand();
+  if (dealerBreak == true) {
+    cout << "Dealer broke" << endl;
+  }
   cout << "Dealer score: " << dealerScore << endl;
   showPlayerHand();
+  if (playerBreak == true) {
+    cout << "Player broke" << endl;
+  }
   cout << "Player score: " << playerScore << endl;
-  if (playerScore > dealerScore || playerHand.size() == 5) {
-    cout << "Player wins!" << endl;
-  } else if (dealerScore > playerScore) {
-    cout << "Dealer wins!" << endl;
-  } else if (playerScore == dealerScore) {
-    cout << "Tie goes to dealer, get over it..." << endl;
+  if (dealer5 == true) {
+    if (player5 == true) {
+      cout << "Both Dealer and Player have 5 cards without breaking... tie "
+              "goes to dealer"
+           << endl;
+    } else {
+      cout << "Dealer has 5 cards without breaking... Dealer wins!" << endl;
+    }
+  } else if (player5 == true) {
+    cout << "Player has 5 cards without breaking... Player wins!" << endl;
+  }
+  if (dealerScore == playerScore) {
+    cout << "Ties go to the dealer" << endl;
+  }
+  if (dealerScore >= playerScore) {
+    cout << "Dealer wins" << endl;
+  }
+  if (playerScore > dealerScore) {
+    cout << "Player wins" << endl;
   }
 }
