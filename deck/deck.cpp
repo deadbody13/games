@@ -91,68 +91,6 @@ void shuffle() {
   deck.push_back(ace4);
 }
 
-// void showPlayerHand() {
-//  for (int i = 0; i < playerHand.size(); i++) {
-//    cout << playerHand[i].topEdge;
-//  }
-//  cout << endl;
-//  for (int i = 0; i < playerHand.size(); i++) {
-//    cout << playerHand[i].graphicTop;
-//  }
-//  cout << endl;
-//  for (int i = 0; i < playerHand.size(); i++) {
-//    cout << playerHand[i].graphicMiddle;
-//  }
-//  cout << endl;
-//  for (int i = 0; i < playerHand.size(); i++) {
-//    cout << playerHand[i].graphicBottom;
-//  }
-//  cout << endl;
-//  for (int i = 0; i < playerHand.size(); i++) {
-//    cout << playerHand[i].bottomEdge;
-//  }
-//  cout << endl;
-//}
-
-// void showDealerHand() {
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     cout << dealerHand[i].topEdge;
-//   }
-//   cout << endl;
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     cout << dealerHand[i].graphicTop;
-//   }
-//   cout << endl;
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     cout << dealerHand[i].graphicMiddle;
-//   }
-//   cout << endl;
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     cout << dealerHand[i].graphicBottom;
-//   }
-//   cout << endl;
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     cout << dealerHand[i].bottomEdge;
-//   }
-//   cout << endl;
-// }
-
-// int playerHandValue() {
-//   int total = 0;
-//   for (int i = 0; i < playerHand.size(); i++) {
-//     total += playerHand[i].value;
-//   }
-//   return total;
-// }
-
-// int dealerHandValue() {
-//   int total = 0;
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     total += dealerHand[i].value;
-//   }
-//   return total;
-// }
-
 int handValue(vector<Cards> &hand) {
   int total = 0;
   for (int i = 0; i < hand.size(); i++) {
@@ -224,7 +162,7 @@ int main() {
   two2.value = 2;
   two2.topEdge = "_________";
   two2.graphicTop = "|2     2|";
-  two2.graphicMiddle = "|   ❤   |";
+  two2.graphicMiddle = "|   ♡   |";
   two2.graphicBottom = "|2     2|";
   two2.bottomEdge = "---------";
 
@@ -240,7 +178,7 @@ int main() {
   two4.value = 2;
   two4.topEdge = "_________";
   two4.graphicTop = "|2     2|";
-  two4.graphicMiddle = "|   ◇   |";
+  two4.graphicMiddle = "|   ♢   |";
   two4.graphicBottom = "|2     2|";
   two4.bottomEdge = "---------";
 
@@ -256,7 +194,7 @@ int main() {
   three2.value = 3;
   three2.topEdge = "_________";
   three2.graphicTop = "|3     3|";
-  three2.graphicMiddle = "|   ❤   |";
+  three2.graphicMiddle = "|   ♡   |";
   three2.graphicBottom = "|3     3|";
   three2.bottomEdge = "---------";
 
@@ -272,7 +210,7 @@ int main() {
   three4.value = 3;
   three4.topEdge = "_________";
   three4.graphicTop = "|3     3|";
-  three4.graphicMiddle = "|   ◇   |";
+  three4.graphicMiddle = "|   ♢   |";
   three4.graphicBottom = "|3     3|";
   three4.bottomEdge = "---------";
 
@@ -288,7 +226,7 @@ int main() {
   four2.value = 4;
   four2.topEdge = "_________";
   four2.graphicTop = "|4     4|";
-  four2.graphicMiddle = "|   ❤   |";
+  four2.graphicMiddle = "|   ♡   |";
   four2.graphicBottom = "|4     4|";
   four2.bottomEdge = "---------";
 
@@ -304,7 +242,7 @@ int main() {
   four4.value = 4;
   four4.topEdge = "_________";
   four4.graphicTop = "|4     4|";
-  four4.graphicMiddle = "|   ◇   |";
+  four4.graphicMiddle = "|   ♢   |";
   four4.graphicBottom = "|4     4|";
   four4.bottomEdge = "---------";
 
@@ -320,7 +258,7 @@ int main() {
   five2.value = 5;
   five2.topEdge = "_________";
   five2.graphicTop = "|5     5|";
-  five2.graphicMiddle = "|   ❤   |";
+  five2.graphicMiddle = "|   ♡   |";
   five2.graphicBottom = "|5     5|";
   five2.bottomEdge = "---------";
 
@@ -336,7 +274,7 @@ int main() {
   five4.value = 5;
   five4.topEdge = "_________";
   five4.graphicTop = "|5     5|";
-  five4.graphicMiddle = "|   ◇   |";
+  five4.graphicMiddle = "|   ♢   |";
   five4.graphicBottom = "|5     5|";
   five4.bottomEdge = "---------";
 
@@ -352,7 +290,7 @@ int main() {
   six2.value = 6;
   six2.topEdge = "_________";
   six2.graphicTop = "|6     6|";
-  six2.graphicMiddle = "|   ❤   |";
+  six2.graphicMiddle = "|   ♡   |";
   six2.graphicBottom = "|6     6|";
   six2.bottomEdge = "---------";
 
@@ -368,7 +306,7 @@ int main() {
   six4.value = 6;
   six4.topEdge = "_________";
   six4.graphicTop = "|6     6|";
-  six4.graphicMiddle = "|   ◇   |";
+  six4.graphicMiddle = "|   ♢   |";
   six4.graphicBottom = "|6     6|";
   six4.bottomEdge = "---------";
 
@@ -384,7 +322,7 @@ int main() {
   seven2.value = 7;
   seven2.topEdge = "_________";
   seven2.graphicTop = "|7     7|";
-  seven2.graphicMiddle = "|   ❤   |";
+  seven2.graphicMiddle = "|   ♡   |";
   seven2.graphicBottom = "|7     7|";
   seven2.bottomEdge = "---------";
 
@@ -400,7 +338,7 @@ int main() {
   seven4.value = 7;
   seven4.topEdge = "_________";
   seven4.graphicTop = "|7     7|";
-  seven4.graphicMiddle = "|   ◇   |";
+  seven4.graphicMiddle = "|   ♢   |";
   seven4.graphicBottom = "|7     7|";
   seven4.bottomEdge = "---------";
 
@@ -416,7 +354,7 @@ int main() {
   eight2.value = 8;
   eight2.topEdge = "_________";
   eight2.graphicTop = "|8     8|";
-  eight2.graphicMiddle = "|   ❤   |";
+  eight2.graphicMiddle = "|   ♡   |";
   eight2.graphicBottom = "|8     8|";
   eight2.bottomEdge = "---------";
 
@@ -432,7 +370,7 @@ int main() {
   eight4.value = 8;
   eight4.topEdge = "_________";
   eight4.graphicTop = "|8     8|";
-  eight4.graphicMiddle = "|   ◇   |";
+  eight4.graphicMiddle = "|   ♢   |";
   eight4.graphicBottom = "|8     8|";
   eight4.bottomEdge = "---------";
 
@@ -448,7 +386,7 @@ int main() {
   nine2.value = 9;
   nine2.topEdge = "_________";
   nine2.graphicTop = "|9     9|";
-  nine2.graphicMiddle = "|   ❤   |";
+  nine2.graphicMiddle = "|   ♡   |";
   nine2.graphicBottom = "|9     9|";
   nine2.bottomEdge = "---------";
 
@@ -464,7 +402,7 @@ int main() {
   nine4.value = 9;
   nine4.topEdge = "_________";
   nine4.graphicTop = "|9     9|";
-  nine4.graphicMiddle = "|   ◇   |";
+  nine4.graphicMiddle = "|   ♢   |";
   nine4.graphicBottom = "|9     9|";
   nine4.bottomEdge = "---------";
 
@@ -480,7 +418,7 @@ int main() {
   ten2.value = 10;
   ten2.topEdge = "_________";
   ten2.graphicTop = "|10   10|";
-  ten2.graphicMiddle = "|   ❤   |";
+  ten2.graphicMiddle = "|   ♡   |";
   ten2.graphicBottom = "|10   10|";
   ten2.bottomEdge = "---------";
 
@@ -496,7 +434,7 @@ int main() {
   ten4.value = 10;
   ten4.topEdge = "_________";
   ten4.graphicTop = "|10   10|";
-  ten4.graphicMiddle = "|   ◇   |";
+  ten4.graphicMiddle = "|   ♢   |";
   ten4.graphicBottom = "|10   10|";
   ten4.bottomEdge = "---------";
 
@@ -511,9 +449,9 @@ int main() {
   jack2.name = "Jack of Hearts";
   jack2.value = 10;
   jack2.topEdge = "_________";
-  jack2.graphicTop = "|❤     ❤|";
+  jack2.graphicTop = "|♡     ♡|";
   jack2.graphicMiddle = "|   J   |";
-  jack2.graphicBottom = "|❤     ❤|";
+  jack2.graphicBottom = "|♡     ♡|";
   jack2.bottomEdge = "---------";
 
   jack3.name = "Jack of Clubs";
@@ -527,9 +465,9 @@ int main() {
   jack4.name = "Jack of Diamonds";
   jack4.value = 10;
   jack4.topEdge = "_________";
-  jack4.graphicTop = "|◇     ◇|";
+  jack4.graphicTop = "|♢     ♢|";
   jack4.graphicMiddle = "|   J   |";
-  jack4.graphicBottom = "|◇     ◇|";
+  jack4.graphicBottom = "|♢     ♢|";
   jack4.bottomEdge = "---------";
 
   queen1.name = "Queen of Spades";
@@ -543,9 +481,9 @@ int main() {
   queen2.name = "Queen of Hearts";
   queen2.value = 10;
   queen2.topEdge = "_________";
-  queen2.graphicTop = "|❤     ❤|";
+  queen2.graphicTop = "|♡     ♡|";
   queen2.graphicMiddle = "|   Q   |";
-  queen2.graphicBottom = "|❤     ❤|";
+  queen2.graphicBottom = "|♡     ♡|";
   queen2.bottomEdge = "---------";
 
   queen3.name = "Queen of Clubs";
@@ -559,9 +497,9 @@ int main() {
   queen4.name = "Queen of Diamonds";
   queen4.value = 10;
   queen4.topEdge = "_________";
-  queen4.graphicTop = "|◇     ◇|";
+  queen4.graphicTop = "|♢     ♢|";
   queen4.graphicMiddle = "|   Q   |";
-  queen4.graphicBottom = "|◇     ◇|";
+  queen4.graphicBottom = "|♢     ♢|";
   queen4.bottomEdge = "---------";
 
   king1.name = "King of Spades";
@@ -575,9 +513,9 @@ int main() {
   king2.name = "King of Hearts";
   king2.value = 10;
   king2.topEdge = "_________";
-  king2.graphicTop = "|❤     ❤|";
+  king2.graphicTop = "|♡     ♡|";
   king2.graphicMiddle = "|   K   |";
-  king2.graphicBottom = "|❤     ❤|";
+  king2.graphicBottom = "|♡     ♡|";
   king2.bottomEdge = "---------";
 
   king3.name = "King of Clubs";
@@ -591,9 +529,9 @@ int main() {
   king4.name = "King of Diamonds";
   king4.value = 10;
   king4.topEdge = "_________";
-  king4.graphicTop = "|◇     ◇|";
+  king4.graphicTop = "|♢     ♢|";
   king4.graphicMiddle = "|   K   |";
-  king4.graphicBottom = "|◇     ◇|";
+  king4.graphicBottom = "|♢     ♢|";
   king4.bottomEdge = "---------";
 
   ace1.name = "Ace of Spades";
@@ -609,9 +547,9 @@ int main() {
   ace2.value = 11;
   ace2.fluidValue = true;
   ace2.topEdge = "_________";
-  ace2.graphicTop = "|❤     ❤|";
+  ace2.graphicTop = "|♡     ♡|";
   ace2.graphicMiddle = "|   A   |";
-  ace2.graphicBottom = "|❤     ❤|";
+  ace2.graphicBottom = "|♡     ♡|";
   ace2.bottomEdge = "---------";
 
   ace3.name = "Ace of Clubs";
@@ -627,9 +565,9 @@ int main() {
   ace4.value = 11;
   ace4.fluidValue = true;
   ace4.topEdge = "_________";
-  ace4.graphicTop = "|◇     ◇|";
+  ace4.graphicTop = "|♢     ♢|";
   ace4.graphicMiddle = "|   A   |";
-  ace4.graphicBottom = "|◇     ◇|";
+  ace4.graphicBottom = "|♢     ♢|";
   ace4.bottomEdge = "---------";
 
   // need to shuffle before every hand;
