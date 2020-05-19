@@ -1,18 +1,18 @@
 #include <iostream>
 #include <time.h>
 #include <vector>
-using namespace std;
 
 class Cards {
 public:
-  string name;
-  string topEdge, bottomEdge, graphicTop, graphicMiddle, graphicBottom, graphic;
+  std::string name;
+  std::string topEdge, bottomEdge, graphicTop, graphicMiddle, graphicBottom,
+      graphic;
   int value;
   bool fluidValue;
 };
-vector<Cards> deck;
-vector<Cards> playerHand;
-vector<Cards> dealerHand;
+std::vector<Cards> deck;
+std::vector<Cards> playerHand;
+std::vector<Cards> dealerHand;
 Cards two1, two2, two3, two4;
 Cards three1, three2, three3, three4;
 Cards four1, four2, four3, four4;
@@ -91,120 +91,71 @@ void shuffle() {
   deck.push_back(ace4);
 }
 
-// void showPlayerHand() {
-//  for (int i = 0; i < playerHand.size(); i++) {
-//    cout << playerHand[i].topEdge;
-//  }
-//  cout << endl;
-//  for (int i = 0; i < playerHand.size(); i++) {
-//    cout << playerHand[i].graphicTop;
-//  }
-//  cout << endl;
-//  for (int i = 0; i < playerHand.size(); i++) {
-//    cout << playerHand[i].graphicMiddle;
-//  }
-//  cout << endl;
-//  for (int i = 0; i < playerHand.size(); i++) {
-//    cout << playerHand[i].graphicBottom;
-//  }
-//  cout << endl;
-//  for (int i = 0; i < playerHand.size(); i++) {
-//    cout << playerHand[i].bottomEdge;
-//  }
-//  cout << endl;
-//}
+void showPlayerHand() {
+  for (int i = 0; i < playerHand.size(); i++) {
+    std::cout << playerHand[i].topEdge;
+  }
+  std::cout << std::endl;
+  for (int i = 0; i < playerHand.size(); i++) {
+    std::cout << playerHand[i].graphicTop;
+  }
+  std::cout << std::endl;
+  for (int i = 0; i < playerHand.size(); i++) {
+    std::cout << playerHand[i].graphicMiddle;
+  }
+  std::cout << std::endl;
+  for (int i = 0; i < playerHand.size(); i++) {
+    std::cout << playerHand[i].graphicBottom;
+  }
+  std::cout << std::endl;
+  for (int i = 0; i < playerHand.size(); i++) {
+    std::cout << playerHand[i].bottomEdge;
+  }
+  std::cout << std::endl;
+}
 
-// void showDealerHand() {
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     cout << dealerHand[i].topEdge;
-//   }
-//   cout << endl;
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     cout << dealerHand[i].graphicTop;
-//   }
-//   cout << endl;
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     cout << dealerHand[i].graphicMiddle;
-//   }
-//   cout << endl;
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     cout << dealerHand[i].graphicBottom;
-//   }
-//   cout << endl;
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     cout << dealerHand[i].bottomEdge;
-//   }
-//   cout << endl;
-// }
+void showDealerHand() {
+  for (int i = 0; i < dealerHand.size(); i++) {
+    std::cout << dealerHand[i].topEdge;
+  }
+  std::cout << std::endl;
+  for (int i = 0; i < dealerHand.size(); i++) {
+    std::cout << dealerHand[i].graphicTop;
+  }
+  std::cout << std::endl;
+  for (int i = 0; i < dealerHand.size(); i++) {
+    std::cout << dealerHand[i].graphicMiddle;
+  }
+  std::cout << std::endl;
+  for (int i = 0; i < dealerHand.size(); i++) {
+    std::cout << dealerHand[i].graphicBottom;
+  }
+  std::cout << std::endl;
+  for (int i = 0; i < dealerHand.size(); i++) {
+    std::cout << dealerHand[i].bottomEdge;
+  }
+  std::cout << std::endl;
+}
 
-// int playerHandValue() {
-//   int total = 0;
-//   for (int i = 0; i < playerHand.size(); i++) {
-//     total += playerHand[i].value;
-//   }
-//   return total;
-// }
-
-// int dealerHandValue() {
-//   int total = 0;
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     total += dealerHand[i].value;
-//   }
-//   return total;
-// }
-
-int handValue(vector<Cards> &hand) {
+int playerHandValue() {
   int total = 0;
-  for (int i = 0; i < hand.size(); i++) {
-    total += hand[i].value;
+  for (int i = 0; i < playerHand.size(); i++) {
+    total += playerHand[i].value;
   }
   return total;
 }
 
-void add2hand(vector<Cards> &hand, int card) {
-  hand.push_back(deck[card]);
-  deck.erase(deck.begin() + card);
-}
-
-void showHand(vector<Cards> &hand) {
-  for (int i = 0; i < hand.size(); i++) {
-    cout << hand[i].topEdge;
+int dealerHandValue() {
+  int total = 0;
+  for (int i = 0; i < dealerHand.size(); i++) {
+    total += dealerHand[i].value;
   }
-  cout << endl;
-  for (int i = 0; i < hand.size(); i++) {
-    cout << hand[i].graphicTop;
-  }
-  cout << endl;
-  for (int i = 0; i < hand.size(); i++) {
-    cout << hand[i].graphicMiddle;
-  }
-  cout << endl;
-  for (int i = 0; i < hand.size(); i++) {
-    cout << hand[i].graphicBottom;
-  }
-  cout << endl;
-  for (int i = 0; i < hand.size(); i++) {
-    cout << hand[i].bottomEdge;
-  }
-  cout << endl;
-}
-
-void showStack(vector<Cards> &hand) {
-  for (int i = 0; i < hand.size() - 1; i++) {
-    cout << hand[i].topEdge << endl;
-    cout << hand[i].graphicTop << endl;
-    cout << hand[i].graphicMiddle << endl;
-  }
-  cout << hand[hand.size() - 1].topEdge << endl;
-  cout << hand[hand.size() - 1].graphicTop << endl;
-  cout << hand[hand.size() - 1].graphicMiddle << endl;
-  cout << hand[hand.size() - 1].graphicBottom << endl;
-  cout << hand[hand.size() - 1].bottomEdge << endl;
+  return total;
 }
 
 void clearScreen() {
   for (int i = 0; i < 50; i++) {
-    cout << "\n" << endl;
+    std::cout << "\n" << std::endl;
   }
 }
 
@@ -632,56 +583,55 @@ int main() {
   ace4.graphicBottom = "|◇     ◇|";
   ace4.bottomEdge = "---------";
 
-  int draw, Ace, highScore, aceValueNum;
-  int playerScore = 0;
-  int dealerScore = 0;
-  string aceValue;
+  int draw, Ace, highScore, aceValueNum, playerScore, dealerScore;
+  // string aceValue;
   char drawCard;
   bool player21 = false;
   bool playerBreak = false;
   bool player5 = false;
   bool dealerBreak = false;
   bool dealer5 = false;
-
   shuffle();
-
-  // player turn
+  // player's turn
   while (1) {
-    // clearScreen();
-    // showHand(playerHand);
+    string aceValue = "y";
+    playerScore = playerHandValue();
+    clearScreen();
+    showPlayerHand();
     cout << "Player Score: " << playerScore << endl;
-    cout << "-------------------" << endl;
     cout << "Would you like to draw a card? [y/n]" << endl;
     cin >> drawCard;
-    while (drawCard != 'y' && drawCard != 'n') {
-      cout << "please select y/n..." << endl;
-      cin >> drawCard;
-    }
     if (drawCard == 'y') {
-      draw = rand() % deck.size() + 0;
-      add2hand(playerHand, draw);
-      clearScreen();
-      showHand(playerHand);
-      if (playerHand[playerHand.size() - 1].fluidValue == true) {
-        cout << "Player Score: " << playerScore << endl;
-        cout << "How would you like this Ace to be scored? [1/11]" << endl;
-        cin >> aceValue;
+      // draw = rand() % deck.size() + 0;
+      draw = 48; // testing Aces
+      playerHand.push_back(deck[draw]);
+      if (deck[draw].fluidValue == true) {
         while (aceValue != "1" && aceValue != "11") {
-          cout << "value has to be either 1 or eleven" << endl;
+          clearScreen();
+          showPlayerHand();
+          cout << "Player Score: " << playerScore << endl;
+          cout << "How would you like this Ace to be scored? [1/11] ... please "
+                  "don't enter a letter, this program will break and I will cry"
+               << endl;
           cin >> aceValue;
-        }
-        if (aceValue == "1") {
-          aceValueNum = 1;
-        } else if (aceValue == "11") {
-          aceValueNum = 11;
+          if (aceValue == "1") {
+            aceValueNum = 1;
+          } else if (aceValue == "11") {
+            aceValueNum = 11;
+          }
         }
         playerHand[playerHand.size() - 1].value = aceValueNum;
       }
+      deck.erase(deck.begin() + draw - 1);
     }
     if (drawCard == 'n') {
+      playerScore = playerHandValue();
+      if (playerScore == 21) {
+        player21 = true;
+      }
       break;
     }
-    playerScore = handValue(playerHand);
+    playerScore = playerHandValue();
     if (playerScore > 21) {
       playerBreak = true;
       playerScore = 0;
@@ -691,45 +641,61 @@ int main() {
       player5 = true;
       break;
     }
-  }
-  while (1) {
     clearScreen();
-    if (dealerScore < 16) {
-      draw = rand() % deck.size() + 0;
-      add2hand(dealerHand, draw);
-    } else {
-      break;
-    }
-    dealerScore = handValue(dealerHand);
+    showPlayerHand();
+    cout << "Player score: " << playerScore << endl;
+  }
+  // dealer's turn
+  while (1) {
+    dealerScore = 0;
+    draw = rand() % deck.size() + 0;
+    dealerHand.push_back(deck[draw]);
+    dealerScore = dealerHandValue();
     if (dealerScore > 21) {
       dealerBreak = true;
       dealerScore = 0;
       break;
     }
+    if (dealerHand.size() == 5) {
+      dealer5 = true;
+      break;
+    }
+    if (dealerScore > 16) {
+      break;
+    }
   }
   clearScreen();
-  showHand(playerHand);
-  if (playerBreak == true) {
-    cout << "Player broke" << endl;
-  }
-  cout << "Player Score: " << playerScore << endl;
-  showHand(dealerHand);
+  cout << "############################" << endl;
+  cout << "END GAME" << endl;
+  cout << "############################" << endl;
+  showDealerHand();
   if (dealerBreak == true) {
     cout << "Dealer broke" << endl;
   }
-  cout << "Dealer Score: " << dealerScore << endl;
-  cout << "-------------------" << endl;
-  if (player5 == true && dealer5 == false) {
-    cout << "Player has 5 cards, Player Wins" << endl;
-  } else if (dealer5 == true && player5 == false) {
-    cout << "Dealer has 5 cards, Dealer Wins" << endl;
-  } else if (dealer5 == true && player5 == true) {
-    cout << "Both players have 5 cards, Dealer Wins" << endl;
-  } else if (playerScore > dealerScore) {
-    cout << "Player wins" << endl;
-  } else if (dealerScore > playerScore) {
+  cout << "Dealer score: " << dealerScore << endl;
+  showPlayerHand();
+  if (playerBreak == true) {
+    cout << "Player broke" << endl;
+  }
+  cout << "Player score: " << playerScore << endl;
+  if (dealer5 == true) {
+    if (player5 == true) {
+      cout << "Both Dealer and Player have 5 cards without breaking... tie "
+              "goes to dealer"
+           << endl;
+    } else {
+      cout << "Dealer has 5 cards without breaking... Dealer wins!" << endl;
+    }
+  } else if (player5 == true) {
+    cout << "Player has 5 cards without breaking... Player wins!" << endl;
+  }
+  if (dealerScore == playerScore) {
+    cout << "Ties go to the dealer" << endl;
+  }
+  if (dealerScore >= playerScore) {
     cout << "Dealer wins" << endl;
-  } else if (playerScore == dealerScore) {
-    cout << "Tie goes to Dealer" << endl;
+  }
+  if (playerScore > dealerScore) {
+    cout << "Player wins" << endl;
   }
 }
