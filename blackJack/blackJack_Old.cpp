@@ -91,68 +91,6 @@ void shuffle() {
   deck.push_back(ace4);
 }
 
-// void showPlayerHand() {
-//  for (int i = 0; i < playerHand.size(); i++) {
-//    cout << playerHand[i].topEdge;
-//  }
-//  cout << endl;
-//  for (int i = 0; i < playerHand.size(); i++) {
-//    cout << playerHand[i].graphicTop;
-//  }
-//  cout << endl;
-//  for (int i = 0; i < playerHand.size(); i++) {
-//    cout << playerHand[i].graphicMiddle;
-//  }
-//  cout << endl;
-//  for (int i = 0; i < playerHand.size(); i++) {
-//    cout << playerHand[i].graphicBottom;
-//  }
-//  cout << endl;
-//  for (int i = 0; i < playerHand.size(); i++) {
-//    cout << playerHand[i].bottomEdge;
-//  }
-//  cout << endl;
-//}
-
-// void showDealerHand() {
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     cout << dealerHand[i].topEdge;
-//   }
-//   cout << endl;
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     cout << dealerHand[i].graphicTop;
-//   }
-//   cout << endl;
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     cout << dealerHand[i].graphicMiddle;
-//   }
-//   cout << endl;
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     cout << dealerHand[i].graphicBottom;
-//   }
-//   cout << endl;
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     cout << dealerHand[i].bottomEdge;
-//   }
-//   cout << endl;
-// }
-
-// int playerHandValue() {
-//   int total = 0;
-//   for (int i = 0; i < playerHand.size(); i++) {
-//     total += playerHand[i].value;
-//   }
-//   return total;
-// }
-
-// int dealerHandValue() {
-//   int total = 0;
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     total += dealerHand[i].value;
-//   }
-//   return total;
-// }
-
 int handValue(vector<Cards> &hand) {
   int total = 0;
   for (int i = 0; i < hand.size(); i++) {
@@ -206,6 +144,21 @@ void clearScreen() {
   for (int i = 0; i < 50; i++) {
     cout << "\n" << endl;
   }
+}
+
+float returnProbability(int score) {
+  int margin = 21 - score;
+  float prob = 0;
+  for (int i = 0; i < deck.size(); i++) {
+    if (deck[i].fluidValue == true && margin < 11) {
+      deck[i].value = 1;
+    }
+    if (deck[i].value <= margin) {
+      prob++;
+    }
+  }
+  prob = prob / deck.size();
+  return prob;
 }
 
 int main() {
@@ -645,25 +598,7 @@ int main() {
 
   shuffle();
 
-  // player turn
-  // playerHandValue = handValue(playerHand);
-  add2hand(playerHand, 16);
-  add2hand(playerHand, 16);
-  add2hand(playerHand, 16);
-  showHand(playerHand);
-  playerScore = handValue(playerHand);
-  int margin = 21 - playerScore;
-  float prob = 0;
-  for (int i = 0; i < deck.size(); i++) {
-    if (deck[i].fluidValue == true && margin < 11) {
-      deck[i].value = 1;
-    }
-    if (deck[i].value <= margin) {
-      prob++;
-    }
-  }
-  cout << "Cards available: " << prob << "   Deck Size: " << deck.size()
-       << endl;
-  prob = prob / deck.size();
-  cout << "Probability of valid card: " << prob << endl;
+  playerScore = 20;
+  float probability = returnProbability(playerScore);
+  cout << probability << endl;
 }

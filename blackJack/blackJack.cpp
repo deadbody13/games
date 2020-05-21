@@ -91,68 +91,6 @@ void shuffle() {
   deck.push_back(ace4);
 }
 
-// void showPlayerHand() {
-//  for (int i = 0; i < playerHand.size(); i++) {
-//    cout << playerHand[i].topEdge;
-//  }
-//  cout << endl;
-//  for (int i = 0; i < playerHand.size(); i++) {
-//    cout << playerHand[i].graphicTop;
-//  }
-//  cout << endl;
-//  for (int i = 0; i < playerHand.size(); i++) {
-//    cout << playerHand[i].graphicMiddle;
-//  }
-//  cout << endl;
-//  for (int i = 0; i < playerHand.size(); i++) {
-//    cout << playerHand[i].graphicBottom;
-//  }
-//  cout << endl;
-//  for (int i = 0; i < playerHand.size(); i++) {
-//    cout << playerHand[i].bottomEdge;
-//  }
-//  cout << endl;
-//}
-
-// void showDealerHand() {
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     cout << dealerHand[i].topEdge;
-//   }
-//   cout << endl;
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     cout << dealerHand[i].graphicTop;
-//   }
-//   cout << endl;
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     cout << dealerHand[i].graphicMiddle;
-//   }
-//   cout << endl;
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     cout << dealerHand[i].graphicBottom;
-//   }
-//   cout << endl;
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     cout << dealerHand[i].bottomEdge;
-//   }
-//   cout << endl;
-// }
-
-// int playerHandValue() {
-//   int total = 0;
-//   for (int i = 0; i < playerHand.size(); i++) {
-//     total += playerHand[i].value;
-//   }
-//   return total;
-// }
-
-// int dealerHandValue() {
-//   int total = 0;
-//   for (int i = 0; i < dealerHand.size(); i++) {
-//     total += dealerHand[i].value;
-//   }
-//   return total;
-// }
-
 int handValue(vector<Cards> &hand) {
   int total = 0;
   for (int i = 0; i < hand.size(); i++) {
@@ -206,6 +144,21 @@ void clearScreen() {
   for (int i = 0; i < 50; i++) {
     cout << "\n" << endl;
   }
+}
+
+float odds(int score) {
+  int margin = 21 - score;
+  float prob = 0;
+  for (int i = 0; i < deck.size(); i++) {
+    if (deck[i].fluidValue == true && margin < 11) {
+      deck[i].value = 1;
+    }
+    if (deck[i].value <= margin) {
+      prob++;
+    }
+  }
+  prob = prob / deck.size();
+  return prob;
 }
 
 int main() {
@@ -633,6 +586,7 @@ int main() {
   ace4.bottomEdge = "---------";
 
   int draw, Ace, highScore, aceValueNum;
+  float survivalDealer, survivalPlayer;
   int playerScore = 0;
   int dealerScore = 0;
   string aceValue;
@@ -647,11 +601,11 @@ int main() {
 
   // player turn
   while (1) {
-    // clearScreen();
-    // showHand(playerHand);
+    survivalPlayer = odds(playerScore);
     cout << "Player Score: " << playerScore << endl;
     cout << "-------------------" << endl;
     cout << "Would you like to draw a card? [y/n]" << endl;
+    cout << "Odds: " << survivalPlayer << endl;
     cin >> drawCard;
     while (drawCard != 'y' && drawCard != 'n') {
       cout << "please select y/n..." << endl;
@@ -693,13 +647,34 @@ int main() {
     }
   }
   while (1) {
-    clearScreen();
-    if (dealerScore < 16) {
+    survivalDealer = odds(dealerScore);
+    if (playerScore == 0) {
       draw = rand() % deck.size() + 0;
       add2hand(dealerHand, draw);
+      dealerScore = handValue(dealerHand);
+      break;
+    }
+    if (dealerScore >= playerScore) {
+      break;
+    }
+    dealerScore = handValue(dealerHand);
+    if (dealerScore < 16 || survivalDealer > 0.5 ||
+        (player5 == true && playerScore < 22)) {
+      draw = rand() % deck.size() + 0;
+      add2hand(dealerHand, draw);
+      
       if (dealerHand[dealerHand.size() - 1].fluidValue == true) {
-        dealerScore = handValue(dealerHand);
-        dealerHand[dealerHand.size() - 1].value = (dealerScore < 11) ? 11 : 1;
+        if (dealerScore < 11) {
+          dealerHand[dealerHand.size() - 1].value = 11;if (dealerScore > 21) {
+      dealerBreak = true;
+      dealerScore = 0;
+      break;
+    }
+        } else {
+          dealerHand[dealerHand.size() - 1].value = 1;
+        }
+        dealerHand[dealerHand.size() - 1].value = (dealerScore < 11) ? 1 :
+        11;
       }
     } else {
       break;
@@ -710,6 +685,10 @@ int main() {
       dealerScore = 0;
       break;
     }
+    if (dealerHand.size() == 5) {
+      dealer5 = true;
+      break;
+    }
   }
   clearScreen();
   showHand(playerHand);
@@ -717,11 +696,13 @@ int main() {
     cout << "Player broke" << endl;
   }
   cout << "Player Score: " << playerScore << endl;
+  cout << "Odds: " << survivalPlayer << endl;
   showHand(dealerHand);
   if (dealerBreak == true) {
     cout << "Dealer broke" << endl;
   }
   cout << "Dealer Score: " << dealerScore << endl;
+  cout << "Odds: " << survivalDealer << endl;
   cout << "-------------------" << endl;
   if (player5 == true && dealer5 == false) {
     cout << "Player has 5 cards, Player Wins" << endl;
