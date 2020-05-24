@@ -8,7 +8,7 @@ public:
   string name;
   string topEdge, bottomEdge, graphicTop, graphicMiddle, graphicBottom, graphic;
   int value;
-  bool fluidValue;
+  bool fluidValue = false;
 };
 vector<Cards> deck;
 vector<Cards> playerHand;
@@ -598,6 +598,7 @@ int main() {
   bool dealer5 = false;
 
   shuffle();
+  clearScreen();
 
   // player turn
   while (1) {
@@ -662,19 +663,16 @@ int main() {
         (player5 == true && playerScore < 22)) {
       draw = rand() % deck.size() + 0;
       add2hand(dealerHand, draw);
-      
+      // Ace value is 1 if dealer score is more than 11
       if (dealerHand[dealerHand.size() - 1].fluidValue == true) {
+        /*
         if (dealerScore < 11) {
-          dealerHand[dealerHand.size() - 1].value = 11;if (dealerScore > 21) {
-      dealerBreak = true;
-      dealerScore = 0;
-      break;
-    }
+          dealerHand[dealerHand.size() - 1].value = 11;
         } else {
           dealerHand[dealerHand.size() - 1].value = 1;
         }
-        dealerHand[dealerHand.size() - 1].value = (dealerScore < 11) ? 1 :
-        11;
+        */
+        dealerHand[dealerHand.size() - 1].value = (dealerScore < 11) ? 1 : 11;
       }
     } else {
       break;

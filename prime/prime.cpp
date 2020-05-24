@@ -38,8 +38,8 @@ int main() {
   ofstream document;
   document.open("primeList.txt");
   for (int i = 0; i < length; i++) {
-    cout << primeNumbers[i] << endl;
-    document << primeNumb.count()ers[i] << endl;
+    // cout << primeNumbers[i] << endl;
+    document << primeNumbers[i] << endl;
   }
   document.close();
   cout << "Time to generate: " << elapsed.count() << " seconds" << endl;
