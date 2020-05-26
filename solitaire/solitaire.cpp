@@ -6,13 +6,16 @@ using namespace std;
 class Cards {
 public:
   string name;
-  string topEdge, bottomEdge, graphicTop, graphicMiddle, graphicBottom, graphic;
+  string topEdge, bottomEdge, graphicTop, graphicMiddle, graphicBottom;
   int value;
   bool fluidValue = false;
+  bool color = true;
 };
 vector<Cards> deck;
+vector<Cards> stack1, stack2, stack3, stack4;
 vector<Cards> playerHand;
 vector<Cards> dealerHand;
+
 Cards two1, two2, two3, two4;
 Cards three1, three2, three3, three4;
 Cards four1, four2, four3, four4;
@@ -103,6 +106,10 @@ void add2hand(vector<Cards> &hand, int card) {
   hand.push_back(deck[card]);
   deck.erase(deck.begin() + card);
 }
+void add2hand(vector<Cards> &startHand, vector<Cards> &endHand, int card) {
+  endHand.push_back(startHand[card]);
+  startHand.erase(startHand.begin() + card);
+}
 
 void showHand(vector<Cards> &hand) {
   for (int i = 0; i < hand.size(); i++) {
@@ -158,11 +165,95 @@ float odds(int score) {
   return prob;
 }
 
+void showStacks() {
+  int size1 = stack1.size();
+  int size2 = stack2.size();
+  int size3 = stack3.size();
+  int size4 = stack4.size();
+  int count1 = size1;
+  if (size2 > count1) {
+    count1 = size2;
+  }
+  if (size3 > count1) {
+    count1 = size3;
+  }
+  if (size4 > count1) {
+    count1 = size4;
+  }
+  int count2 = 4;
+  for (int i = 0; i < count1; i++) {
+    if (i < stack1.size()) {
+      cout << stack1[i].topEdge;
+    } else {
+      cout << "         ";
+    }
+    if (i < stack2.size()) {
+      cout << stack2[i].topEdge;
+    } else {
+      cout << "         ";
+    }
+    if (i < stack3.size()) {
+      cout << stack3[i].topEdge;
+    } else {
+      cout << "         ";
+    }
+    if (i < stack4.size()) {
+      cout << stack4[i].topEdge;
+    } else {
+      cout << "         ";
+    }
+    cout << endl;
+    if (i < stack1.size()) {
+      cout << stack1[i].graphicTop;
+    } else {
+      cout << "         ";
+    }
+    if (i < stack2.size()) {
+      cout << stack2[i].graphicTop;
+    } else {
+      cout << "         ";
+    }
+    if (i < stack3.size()) {
+      cout << stack3[i].graphicTop;
+    } else {
+      cout << "         ";
+    }
+    if (i < stack4.size()) {
+      cout << stack4[i].graphicTop;
+    } else {
+      cout << "         ";
+    }
+    cout << endl;
+    if (i < stack1.size()) {
+      cout << stack1[i].graphicMiddle;
+    } else {
+      cout << "         ";
+    }
+    if (i < stack2.size()) {
+      cout << stack2[i].graphicMiddle;
+    } else {
+      cout << "         ";
+    }
+    if (i < stack3.size()) {
+      cout << stack3[i].graphicMiddle;
+    } else {
+      cout << "         ";
+    }
+    if (i < stack4.size()) {
+      cout << stack4[i].graphicMiddle;
+    } else {
+      cout << "         ";
+    }
+    cout << endl;
+  }
+}
+
 int main() {
   using namespace std;
   srand(time(NULL));
 
   two1.name = "Two of Spades";
+  two1.color = false;
   two1.value = 2;
   two1.topEdge = "_________";
   two1.graphicTop = "|2     2|";
@@ -179,6 +270,7 @@ int main() {
   two2.bottomEdge = "---------";
 
   two3.name = "Two of Clubs";
+  two3.color = false;
   two3.value = 2;
   two3.topEdge = "_________";
   two3.graphicTop = "|2     2|";
@@ -195,6 +287,7 @@ int main() {
   two4.bottomEdge = "---------";
 
   three1.name = "Three of Spades";
+  three1.color = false;
   three1.value = 3;
   three1.topEdge = "_________";
   three1.graphicTop = "|3     3|";
@@ -211,6 +304,7 @@ int main() {
   three2.bottomEdge = "---------";
 
   three3.name = "Three of Clubs";
+  three3.color = false;
   three3.value = 3;
   three3.topEdge = "_________";
   three3.graphicTop = "|3     3|";
@@ -227,6 +321,7 @@ int main() {
   three4.bottomEdge = "---------";
 
   four1.name = "Four of Spades";
+  four1.color = false;
   four1.value = 4;
   four1.topEdge = "_________";
   four1.graphicTop = "|4     4|";
@@ -243,6 +338,7 @@ int main() {
   four2.bottomEdge = "---------";
 
   four3.name = "Four of Clubs";
+  four3.color = false;
   four3.value = 4;
   four3.topEdge = "_________";
   four3.graphicTop = "|4     4|";
@@ -259,6 +355,7 @@ int main() {
   four4.bottomEdge = "---------";
 
   five1.name = "Five of Spades";
+  five1.color = false;
   five1.value = 5;
   five1.topEdge = "_________";
   five1.graphicTop = "|5     5|";
@@ -275,6 +372,7 @@ int main() {
   five2.bottomEdge = "---------";
 
   five3.name = "Five of Clubs";
+  five3.color = false;
   five3.value = 5;
   five3.topEdge = "_________";
   five3.graphicTop = "|5     5|";
@@ -291,6 +389,7 @@ int main() {
   five4.bottomEdge = "---------";
 
   six1.name = "Six of Spades";
+  six1.color = false;
   six1.value = 6;
   six1.topEdge = "_________";
   six1.graphicTop = "|6     6|";
@@ -307,6 +406,7 @@ int main() {
   six2.bottomEdge = "---------";
 
   six3.name = "Six of Clubs";
+  six3.color = false;
   six3.value = 6;
   six3.topEdge = "_________";
   six3.graphicTop = "|6     6|";
@@ -323,6 +423,7 @@ int main() {
   six4.bottomEdge = "---------";
 
   seven1.name = "Seven of Spades";
+  seven1.color = false;
   seven1.value = 7;
   seven1.topEdge = "_________";
   seven1.graphicTop = "|7     7|";
@@ -339,6 +440,7 @@ int main() {
   seven2.bottomEdge = "---------";
 
   seven3.name = "Seven of Clubs";
+  seven3.color = false;
   seven3.value = 7;
   seven3.topEdge = "_________";
   seven3.graphicTop = "|7     7|";
@@ -355,6 +457,7 @@ int main() {
   seven4.bottomEdge = "---------";
 
   eight1.name = "Eight of Spades";
+  eight1.color = false;
   eight1.value = 8;
   eight1.topEdge = "_________";
   eight1.graphicTop = "|8     8|";
@@ -371,6 +474,7 @@ int main() {
   eight2.bottomEdge = "---------";
 
   eight3.name = "Eight of Clubs";
+  eight3.color = false;
   eight3.value = 8;
   eight3.topEdge = "_________";
   eight3.graphicTop = "|8     8|";
@@ -387,6 +491,7 @@ int main() {
   eight4.bottomEdge = "---------";
 
   nine1.name = "Nine of Spades";
+  nine1.color = false;
   nine1.value = 9;
   nine1.topEdge = "_________";
   nine1.graphicTop = "|9     9|";
@@ -403,6 +508,7 @@ int main() {
   nine2.bottomEdge = "---------";
 
   nine3.name = "Nine of Clubs";
+  nine3.color = false;
   nine3.value = 9;
   nine3.topEdge = "_________";
   nine3.graphicTop = "|9     9|";
@@ -419,6 +525,7 @@ int main() {
   nine4.bottomEdge = "---------";
 
   ten1.name = "Ten of Spades";
+  ten1.color = false;
   ten1.value = 10;
   ten1.topEdge = "_________";
   ten1.graphicTop = "|10   10|";
@@ -435,6 +542,7 @@ int main() {
   ten2.bottomEdge = "---------";
 
   ten3.name = "Ten of Clubs";
+  ten3.color = false;
   ten3.value = 10;
   ten3.topEdge = "_________";
   ten3.graphicTop = "|10   10|";
@@ -451,6 +559,7 @@ int main() {
   ten4.bottomEdge = "---------";
 
   jack1.name = "Jack of Spades";
+  jack1.color = false;
   jack1.value = 10;
   jack1.topEdge = "_________";
   jack1.graphicTop = "|♠     ♠|";
@@ -467,6 +576,7 @@ int main() {
   jack2.bottomEdge = "---------";
 
   jack3.name = "Jack of Clubs";
+  jack3.color = false;
   jack3.value = 10;
   jack3.topEdge = "_________";
   jack3.graphicTop = "|♣     ♣|";
@@ -483,6 +593,7 @@ int main() {
   jack4.bottomEdge = "---------";
 
   queen1.name = "Queen of Spades";
+  queen1.color = false;
   queen1.value = 10;
   queen1.topEdge = "_________";
   queen1.graphicTop = "|♠     ♠|";
@@ -499,6 +610,7 @@ int main() {
   queen2.bottomEdge = "---------";
 
   queen3.name = "Queen of Clubs";
+  queen3.color = false;
   queen3.value = 10;
   queen3.topEdge = "_________";
   queen3.graphicTop = "|♣     ♣|";
@@ -515,6 +627,7 @@ int main() {
   queen4.bottomEdge = "---------";
 
   king1.name = "King of Spades";
+  king1.color = false;
   king1.value = 10;
   king1.topEdge = "_________";
   king1.graphicTop = "|♠     ♠|";
@@ -531,6 +644,7 @@ int main() {
   king2.bottomEdge = "---------";
 
   king3.name = "King of Clubs";
+  king3.color = false;
   king3.value = 10;
   king3.topEdge = "_________";
   king3.graphicTop = "|♣     ♣|";
@@ -547,6 +661,7 @@ int main() {
   king4.bottomEdge = "---------";
 
   ace1.name = "Ace of Spades";
+  ace1.color = false;
   ace1.value = 11;
   ace1.fluidValue = true;
   ace1.topEdge = "_________";
@@ -565,6 +680,7 @@ int main() {
   ace2.bottomEdge = "---------";
 
   ace3.name = "Ace of Clubs";
+  ace3.color = false;
   ace3.value = 11;
   ace3.fluidValue = true;
   ace3.topEdge = "_________";
@@ -597,119 +713,18 @@ int main() {
   shuffle();
   clearScreen();
 
-  // player turn
-  while (1) {
-    survivalPlayer = odds(playerScore);
-    cout << "Player Score: " << playerScore << endl;
-    cout << "-------------------" << endl;
-    cout << "Would you like to draw a card? [y/n]" << endl;
-    cout << "Odds: " << survivalPlayer << endl;
-    cin >> drawCard;
-    while (drawCard != 'y' && drawCard != 'n') {
-      cout << "please select y/n..." << endl;
-      cin >> drawCard;
-    }
-    if (drawCard == 'y') {
-      draw = rand() % deck.size() + 0;
-      add2hand(playerHand, draw);
-      clearScreen();
-      showHand(playerHand);
-      if (playerHand[playerHand.size() - 1].fluidValue == true) {
-        cout << "Player Score: " << playerScore << endl;
-        cout << "How would you like this Ace to be scored? [1/11]" << endl;
-        cin >> aceValue;
-        while (aceValue != "1" && aceValue != "11") {
-          cout << "value has to be either 1 or eleven" << endl;
-          cin >> aceValue;
-        }
-        if (aceValue == "1") {
-          aceValueNum = 1;
-        } else if (aceValue == "11") {
-          aceValueNum = 11;
-        }
-        playerHand[playerHand.size() - 1].value = aceValueNum;
-      }
-    }
-    if (drawCard == 'n') {
-      break;
-    }
-    playerScore = handValue(playerHand);
-    if (playerScore > 21) {
-      playerBreak = true;
-      playerScore = 0;
-      break;
-    }
-    if (playerHand.size() == 5) {
-      player5 = true;
-      break;
-    }
+  for (int i = 0; i < 4; i++) {
+    add2hand(deck, stack1, deck.size() - 1);
   }
-  while (1) {
-    survivalDealer = odds(dealerScore);
-    if (playerScore == 0) {
-      draw = rand() % deck.size() + 0;
-      add2hand(dealerHand, draw);
-      dealerScore = handValue(dealerHand);
-      break;
-    }
-    if (dealerScore >= playerScore) {
-      break;
-    }
-    dealerScore = handValue(dealerHand);
-    if (dealerScore < 16 || survivalDealer > 0.5 ||
-        (player5 == true && playerScore < 22)) {
-      draw = rand() % deck.size() + 0;
-      add2hand(dealerHand, draw);
-      // Ace value is 1 if dealer score is more than 11
-      if (dealerHand[dealerHand.size() - 1].fluidValue == true) {
-        /*
-        if (dealerScore < 11) {
-          dealerHand[dealerHand.size() - 1].value = 11;
-        } else {
-          dealerHand[dealerHand.size() - 1].value = 1;
-        }
-        */
-        dealerHand[dealerHand.size() - 1].value = (dealerScore < 11) ? 1 : 11;
-      }
-    } else {
-      break;
-    }
-    dealerScore = handValue(dealerHand);
-    if (dealerScore > 21) {
-      dealerBreak = true;
-      dealerScore = 0;
-      break;
-    }
-    if (dealerHand.size() == 5) {
-      dealer5 = true;
-      break;
-    }
+  for (int i = 0; i < 3; i++) {
+    add2hand(deck, stack2, deck.size() - 1);
   }
-  clearScreen();
-  showHand(playerHand);
-  if (playerBreak == true) {
-    cout << "Player broke" << endl;
+  for (int i = 0; i < 3; i++) {
+    add2hand(deck, stack3, deck.size() - 1);
   }
-  cout << "Player Score: " << playerScore << endl;
-  cout << "Odds: " << survivalPlayer << endl;
-  showHand(dealerHand);
-  if (dealerBreak == true) {
-    cout << "Dealer broke" << endl;
+  for (int i = 0; i < 6; i++) {
+    add2hand(deck, stack4, deck.size() - 1);
   }
-  cout << "Dealer Score: " << dealerScore << endl;
-  cout << "Odds: " << survivalDealer << endl;
-  cout << "-------------------" << endl;
-  if (player5 == true && dealer5 == false) {
-    cout << "Player has 5 cards, Player Wins" << endl;
-  } else if (dealer5 == true && player5 == false) {
-    cout << "Dealer has 5 cards, Dealer Wins" << endl;
-  } else if (dealer5 == true && player5 == true) {
-    cout << "Both players have 5 cards, Dealer Wins" << endl;
-  } else if (playerScore > dealerScore) {
-    cout << "Player wins" << endl;
-  } else if (dealerScore > playerScore) {
-    cout << "Dealer wins" << endl;
-  } else if (playerScore == dealerScore) {
-    cout << "Tie goes to Dealer" << endl;
-  }
+
+  showStacks();
 }
