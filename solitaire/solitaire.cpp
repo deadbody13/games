@@ -30,7 +30,7 @@ Cards queen1, queen2, queen3, queen4;
 Cards king1, king2, king3, king4;
 Cards ace1, ace2, ace3, ace4;
 
-void shuffle() {
+void orderDeck() {
   while (!deck.empty()) {
     deck.pop_back();
   }
@@ -92,6 +92,14 @@ void shuffle() {
   deck.push_back(ace2);
   deck.push_back(ace3);
   deck.push_back(ace4);
+}
+void shuffleDeck() {
+  int draw;
+  for (int i = 0; i < 1000; i++) {
+    draw = rand() % deck.size();
+    deck.push_back(deck[draw]);
+    deck.erase(deck.begin() + draw);
+  }
 }
 
 int handValue(vector<Cards> &hand) {
@@ -246,6 +254,10 @@ void showStacks() {
     }
     cout << endl;
   }
+}
+int randomCard() {
+  int card = rand() % deck.size();
+  return card;
 }
 
 int main() {
@@ -698,33 +710,11 @@ int main() {
   ace4.graphicBottom = "|♢     ♢|";
   ace4.bottomEdge = "---------";
 
-  int draw, Ace, highScore, aceValueNum;
-  float survivalDealer, survivalPlayer;
-  int playerScore = 0;
-  int dealerScore = 0;
-  string aceValue;
-  char drawCard;
-  bool player21 = false;
-  bool playerBreak = false;
-  bool player5 = false;
-  bool dealerBreak = false;
-  bool dealer5 = false;
-
-  shuffle();
-  clearScreen();
-
-  for (int i = 0; i < 4; i++) {
-    add2hand(deck, stack1, deck.size() - 1);
+  orderDeck();
+  int draw;
+  for (int i = 0; i < 100rand() % deck.size();
+  cout << card << endl;; i++) {
+    draw = randomCard();
+    cout << draw << endl;
   }
-  for (int i = 0; i < 3; i++) {
-    add2hand(deck, stack2, deck.size() - 1);
-  }
-  for (int i = 0; i < 3; i++) {
-    add2hand(deck, stack3, deck.size() - 1);
-  }
-  for (int i = 0; i < 6; i++) {
-    add2hand(deck, stack4, deck.size() - 1);
-  }
-
-  showStacks();
 }
