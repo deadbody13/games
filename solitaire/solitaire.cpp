@@ -13,6 +13,7 @@ public:
 };
 vector<Cards> deck;
 vector<Cards> stack1, stack2, stack3, stack4;
+vector<vector<Cards>> stacks{stack1, stack2, stack3, stack4};
 vector<Cards> playerHand;
 vector<Cards> dealerHand;
 
@@ -722,111 +723,19 @@ int main() {
 
   orderDeck();
   // shuffleDeck();
-  add2hand(deck, stack1, deck.size() - 1);
-  add2hand(deck, stack1, deck.size() - 1);
-  add2hand(deck, stack1, deck.size() - 1);
-  add2hand(deck, stack1, deck.size() - 1);
-  add2hand(deck, stack2, deck.size() - 1);
-  add2hand(deck, stack2, deck.size() - 1);
-  add2hand(deck, stack3, deck.size() - 1);
-  add2hand(deck, stack4, deck.size() - 1);
-  add2hand(deck, stack4, deck.size() - 1);
-  add2hand(stack1, stack4, stack1.size() - 1);
-  /*
-  int count1 = stack1.size();
-  if (count1 < stack2.size()) {
-    count1 = stack2.size();
-  }
-  if (count1 < stack3.size()) {
-    count1 = stack3.size();
-  }
-  if (count1 < stack4.size()) {
-    count1 = stack4.size();
-  }
-  for (int i = 0; i < count1; i++) {
-    if (i == 0) {
-      cout << deck[i].topEdge << "         ";
-    } else if (i == 1) {
-      cout << deck[0].graphicBottom << "         ";
-    } else {
-      cout << "                  ";
-    }
-    if (i < stack1.size()) {
-      cout << stack1[i].topEdge;
-    } else {
-      cout << "         ";
-    }
-    if (i < stack2.size()) {
-      cout << stack2[i].topEdge;
-    } else {
-      cout << "         ";
-    }
-    if (i < stack3.size()) {
-      cout << stack3[i].topEdge;
-    } else {
-      cout << "         ";
-    }
-    if (i < stack4.size()) {
-      cout << stack4[i].topEdge;
-    } else {
-      cout << "         ";
-    }
-    cout << endl;
-    if (i == 0) {
-      cout << deck[i].graphicTop << "         ";
-    } else if (i == 1) {
-      cout << deck[0].bottomEdge << "         ";
-    } else {
-      cout << "                  ";
-    }
-    if (i < stack1.size()) {
-      cout << stack1[i].graphicTop;
-    } else {
-      cout << "         ";
-    }
-    if (i < stack2.size()) {
-      cout << stack2[i].graphicTop;
-    } else {
-      cout << "         ";
-    }
-    if (i < stack3.size()) {
-      cout << stack3[i].graphicTop;
-    } else {
-      cout << "         ";
-    }
-    if (i < stack4.size()) {
-      cout << stack4[i].graphicTop;
-    } else {
-      cout << "         ";
-    }
-    cout << endl;
-    if (i == 0) {
-      cout << deck[i].graphicMiddle << "         ";
-    } else {
-      cout << "                  ";
-    }
-    if (i < stack1.size()) {
-      cout << stack1[i].graphicMiddle;
-    } else {
-      cout << "         ";
-    }
-    if (i < stack2.size()) {
-      cout << stack2[i].graphicMiddle;
-    } else {
-      cout << "         ";
-    }
-    if (i < stack3.size()) {
-      cout << stack3[i].graphicMiddle;
-    } else {
-      cout << "         ";
-    }
-    if (i < stack4.size()) {
-      cout << stack4[i].graphicMiddle;
-    } else {
-      cout << "         ";
-    }
-    cout << endl;
-  }*/
-  showField();
-  
+
+  add2hand(deck, stack1, 0);
+  cout << stacks[0][0].name << endl;
+  // for (int i = 0; i < 4; i++) {
+  //  for (int j = 0; j < 4; j++) {
+  //    add2hand(deck, stacks[i], 0);
+  //  }
+  //}
+  //
+  // for (int i = 0; i < 4; i++) {
+  //  for (int j = 0; j < 4; j++) {
+  //    cout << stacks[i][j].name << endl;
+  //  }
+  //  cout << endl;
+  //}
 }
