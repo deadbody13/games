@@ -12,8 +12,10 @@ public:
   bool color = true;
 };
 vector<Cards> deck;
-vector<Cards> stack1, stack2, stack3, stack4;
-vector<vector<Cards>> stacks{stack1, stack2, stack3, stack4};
+vector<Cards> stack1, stack2, stack3, stack4, field1, field2, field3, field4,
+    field5, field6, field7;
+vector<vector<Cards>> stacks{deck,   stack1, stack2, stack3, stack4, field1,
+                             field2, field3, field4, field5, field6, field7};
 vector<Cards> playerHand;
 vector<Cards> dealerHand;
 
@@ -721,21 +723,46 @@ int main() {
   ace4.graphicBottom = "|♢     ♢|";
   ace4.bottomEdge = "---------";
 
+  clearScreen();
   orderDeck();
-  // shuffleDeck();
+  shuffleDeck();
 
-  add2hand(deck, stack1, 0);
-  cout << stacks[0][0].name << endl;
-  // for (int i = 0; i < 4; i++) {
-  //  for (int j = 0; j < 4; j++) {
-  //    add2hand(deck, stacks[i], 0);
-  //  }
-  //}
-  //
-  // for (int i = 0; i < 4; i++) {
-  //  for (int j = 0; j < 4; j++) {
-  //    cout << stacks[i][j].name << endl;
-  //  }
-  //  cout << endl;
-  //}
+  int count = 1;
+  for (int i = 5; i < 12; i++) {
+    for (int j = 0; j < count; j++) {
+      add2hand(deck, stacks[i], 0);
+    }
+    count++;
+  }
+  
+  cout<<"sel:";
+  for (int i = 1; i < 8; i++) {
+    cout << "[" << i << "]    ard count  ";
+  }
+  cout << endl;
+  for (int i = 5; i < 12; i++) {
+    cout << stacks[i][0].topEdge;
+  }
+  cout << endl;
+  for (int i = 5; i < 12; i++) {
+    cout << stacks[i][0].graphicTop;
+  }
+  cout << endl;
+  for (int i = 5; i < 12; i++) {
+    cout << stacks[i][0].graphicMiddle;
+  }
+  cout << endl;
+  for (int i = 5; i < 12; i++) {
+    cout << stacks[i][0].graphicBottom;
+  }
+  cout << endl;
+  for (int i = 5; i < 12; i++) {
+    cout << stacks[i][0].bottomEdge;
+  }
+  cout << endl;
+  cout << "CC: ";
+  for (int i = 5; i < 12; i++) {
+    cout << stacks[i].size() << "        ";
+  }
+  cout << endl;
 }
