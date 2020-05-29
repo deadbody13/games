@@ -34,8 +34,8 @@ Cards king1, king2, king3, king4;
 Cards ace1, ace2, ace3, ace4;
 
 void orderDeck() {
-  while (!deck.empty()) {
-    deck.pop_back();
+  while (!stacks[0].empty()) {
+    stacks[0].pop_back();
   }
   while (!playerHand.empty()) {
     playerHand.pop_back();
@@ -43,65 +43,65 @@ void orderDeck() {
   while (!dealerHand.empty()) {
     dealerHand.pop_back();
   }
-  deck.push_back(two1);
-  deck.push_back(two2);
-  deck.push_back(two3);
-  deck.push_back(two4);
-  deck.push_back(three1);
-  deck.push_back(three2);
-  deck.push_back(three3);
-  deck.push_back(three4);
-  deck.push_back(four1);
-  deck.push_back(four2);
-  deck.push_back(four3);
-  deck.push_back(four4);
-  deck.push_back(five1);
-  deck.push_back(five2);
-  deck.push_back(five3);
-  deck.push_back(five4);
-  deck.push_back(six1);
-  deck.push_back(six2);
-  deck.push_back(six3);
-  deck.push_back(six4);
-  deck.push_back(seven1);
-  deck.push_back(seven2);
-  deck.push_back(seven3);
-  deck.push_back(seven4);
-  deck.push_back(eight1);
-  deck.push_back(eight2);
-  deck.push_back(eight3);
-  deck.push_back(eight4);
-  deck.push_back(nine1);
-  deck.push_back(nine2);
-  deck.push_back(nine3);
-  deck.push_back(nine4);
-  deck.push_back(ten1);
-  deck.push_back(ten2);
-  deck.push_back(ten3);
-  deck.push_back(ten4);
-  deck.push_back(jack1);
-  deck.push_back(jack2);
-  deck.push_back(jack3);
-  deck.push_back(jack4);
-  deck.push_back(queen1);
-  deck.push_back(queen2);
-  deck.push_back(queen3);
-  deck.push_back(queen4);
-  deck.push_back(king1);
-  deck.push_back(king2);
-  deck.push_back(king3);
-  deck.push_back(king4);
-  deck.push_back(ace1);
-  deck.push_back(ace2);
-  deck.push_back(ace3);
-  deck.push_back(ace4);
+  stacks[0].push_back(two1);
+  stacks[0].push_back(two2);
+  stacks[0].push_back(two3);
+  stacks[0].push_back(two4);
+  stacks[0].push_back(three1);
+  stacks[0].push_back(three2);
+  stacks[0].push_back(three3);
+  stacks[0].push_back(three4);
+  stacks[0].push_back(four1);
+  stacks[0].push_back(four2);
+  stacks[0].push_back(four3);
+  stacks[0].push_back(four4);
+  stacks[0].push_back(five1);
+  stacks[0].push_back(five2);
+  stacks[0].push_back(five3);
+  stacks[0].push_back(five4);
+  stacks[0].push_back(six1);
+  stacks[0].push_back(six2);
+  stacks[0].push_back(six3);
+  stacks[0].push_back(six4);
+  stacks[0].push_back(seven1);
+  stacks[0].push_back(seven2);
+  stacks[0].push_back(seven3);
+  stacks[0].push_back(seven4);
+  stacks[0].push_back(eight1);
+  stacks[0].push_back(eight2);
+  stacks[0].push_back(eight3);
+  stacks[0].push_back(eight4);
+  stacks[0].push_back(nine1);
+  stacks[0].push_back(nine2);
+  stacks[0].push_back(nine3);
+  stacks[0].push_back(nine4);
+  stacks[0].push_back(ten1);
+  stacks[0].push_back(ten2);
+  stacks[0].push_back(ten3);
+  stacks[0].push_back(ten4);
+  stacks[0].push_back(jack1);
+  stacks[0].push_back(jack2);
+  stacks[0].push_back(jack3);
+  stacks[0].push_back(jack4);
+  stacks[0].push_back(queen1);
+  stacks[0].push_back(queen2);
+  stacks[0].push_back(queen3);
+  stacks[0].push_back(queen4);
+  stacks[0].push_back(king1);
+  stacks[0].push_back(king2);
+  stacks[0].push_back(king3);
+  stacks[0].push_back(king4);
+  stacks[0].push_back(ace1);
+  stacks[0].push_back(ace2);
+  stacks[0].push_back(ace3);
+  stacks[0].push_back(ace4);
 }
 void shuffleDeck() {
   int draw;
   for (int i = 0; i < 1000; i++) {
-    draw = rand() % deck.size();
-    deck.push_back(deck[draw]);
-    deck.erase(deck.begin() + draw);
+    draw = rand() % stacks[0].size();
+    stacks[0].push_back(stacks[0][draw]);
+    stacks[0].erase(stacks[0].begin() + draw);
   }
 }
 
@@ -727,17 +727,63 @@ int main() {
   orderDeck();
   shuffleDeck();
 
+  for (int i = 0; i < 5; i++) {
+    if (stacks[i].size() > 0) {
+      cout << stacks[i][0].topEdge;
+    }
+    if (i == 0) {
+      cout << "                  ";
+    }
+  }
+  cout << endl;
+  for (int i = 0; i < 5; i++) {
+    if (stacks[i].size() > 0) {
+      cout << stacks[i][0].graphicTop;
+    }
+    if (i == 0) {
+      cout << "                  ";
+    }
+  }
+  cout << endl;
+  for (int i = 0; i < 5; i++) {
+    if (stacks[i].size() > 0) {
+      cout << stacks[i][0].graphicMiddle;
+    }
+    if (i == 0) {
+      cout << "                  ";
+    }
+  }
+  cout << endl;
+  for (int i = 0; i < 5; i++) {
+    if (stacks[i].size() > 0) {
+      cout << stacks[i][0].graphicBottom;
+    }
+    if (i == 0) {
+      cout << "                  ";
+    }
+  }
+  cout << endl;
+  for (int i = 0; i < 5; i++) {
+    if (stacks[i].size() > 0) {
+      cout << stacks[i][0].bottomEdge;
+    }
+    if (i == 0) {
+      cout << "                  ";
+    }
+  }
+  cout << "\n\n\n";
+
   int count = 1;
   for (int i = 5; i < 12; i++) {
     for (int j = 0; j < count; j++) {
-      add2hand(deck, stacks[i], 0);
+      add2hand(stacks[0], stacks[i], 0);
     }
     count++;
   }
-  
-  cout<<"sel:";
+
+  cout << "sel:\n  ";
   for (int i = 1; i < 8; i++) {
-    cout << "[" << i << "]    ard count  ";
+    cout << "[" << i << "]      ";
   }
   cout << endl;
   for (int i = 5; i < 12; i++) {
@@ -760,7 +806,8 @@ int main() {
     cout << stacks[i][0].bottomEdge;
   }
   cout << endl;
-  cout << "CC: ";
+
+  cout << "CC: \n   ";
   for (int i = 5; i < 12; i++) {
     cout << stacks[i].size() << "        ";
   }
