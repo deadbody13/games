@@ -7,6 +7,8 @@ using namespace std;
 
 int main() {
   vector<int> primeNumbers{2, 3};
+  int difference = 0;
+  int maxDifference = 0;
   int target;
   bool prime;
   cout << "How many prime numbers would you like? [2 or  more]" << endl;
@@ -24,6 +26,11 @@ int main() {
     }
     if (prime == true) {
       primeNumbers.push_back(count);
+      difference = primeNumbers[primeNumbers.size() - 1] -
+                   primeNumbers[primeNumbers.size() - 2];
+      if (difference > maxDifference) {
+        maxDifference = difference;
+      }
     }
     count += 2;
     length = primeNumbers.size();
@@ -36,11 +43,12 @@ int main() {
   ofstream document;
   document.open("primeList.txt");
   for (int i = 0; i < length; i++) {
-    // cout << primeNumbers[i] << endl;
     document << primeNumbers[i] << endl;
   }
   document.close();
   cout << "Time to generate: " << elapsed.count() << " seconds" << endl;
   cout << "                  " << elapsed.count() / 60 << " minutes" << endl;
   cout << "                  " << elapsed.count() / 3600 << " hours" << endl;
+  cout << "\nHighest difference: " << maxDifference << endl;
+  cout << endl;
 }

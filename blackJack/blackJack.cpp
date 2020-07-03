@@ -127,16 +127,6 @@ void showHand(vector<Cards> &hand) {
   cout << endl;
 }
 
-void showStack(vector<Cards> &hand) {
-  for (int i = 0; i < hand.size(); i++) {
-    cout << hand[i].topEdge << endl;
-    cout << hand[i].graphicTop << endl;
-    cout << hand[i].graphicMiddle << endl;
-  }
-  cout << hand[hand.size() - 1].graphicBottom << endl;
-  cout << hand[hand.size() - 1].bottomEdge << endl;
-}
-
 void clearScreen() {
   for (int i = 0; i < 50; i++) {
     cout << "\n" << endl;
@@ -644,6 +634,7 @@ int main() {
       break;
     }
   }
+  // dealer's turn
   while (1) {
     survivalDealer = odds(dealerScore);
     if (playerScore == 0) {
