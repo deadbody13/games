@@ -347,65 +347,79 @@ int main() {
   king3.graphic = "[K   ♣]";
 
   king4.name = "King of Diamonds";
+  king4.color = true;
   king4.value = 10;
   king4.graphic = "[K   ♢]";
 
   ace1.name = "Ace of Spades";
   ace1.color = false;
-  ace1.value = 10;
+  ace1.value = 11;
   ace1.graphic = "[A   ♠]";
 
   ace2.name = "Ace of Hearts";
-  ace2.value = 10;
+  ace2.color = true;
+  ace2.value = 11;
+  ace2.fluidValue = true;
   ace2.graphic = "[A   ♡]";
 
   ace3.name = "Ace of Clubs";
   ace3.color = false;
-  ace3.value = 10;
+  ace3.value = 11;
+  ace3.fluidValue = true;
   ace3.graphic = "[A   ♣]";
 
   ace4.name = "Ace of Diamonds";
-  ace4.value = 10;
+  ace4.color = true;
+  ace4.value = 11;
+  ace4.fluidValue = true;
   ace4.graphic = "[A   ♢]";
 
   // order & shuffle deck first
+  clearScreen();
   orderDeck();
   shuffleDeck();
 
-  int playerScore, fluidChoice;
+  int playerScore = 0;
+  int fluidChoice;
   char choice;
 
   // while player's score is 21 or less
   while (playerScore < 22) {
     cout << "Would you like to draw a card? [y/n]" << endl;
+    cin >> choice;
     // only enter y/n
-    while (choice != ('y' | 'n')) {
+
+    while (choice != 'y' && choice != 'n') {
+      cout << "Not a valid choice..." << endl;
       cin >> choice;
-      if (choice != ('y' | 'n')) {
-        cout << "Not please enter a valid choice..." << endl;
-      }
     }
     if (choice == 'n') {
       break;
     }
     // in case of Ace being drawn... can be 1 or 11
     else {
+      clearScreen();
       if (deck[0].fluidValue == true) {
+        showHand(stack1);
+        cout << deck[0].graphic << endl;
         cout << "Would you like this to be counted as a 1 or 11? [1/11]"
              << endl;
-        while (fluidChoice != (1 | 11)) {
+        while (fluidChoice != 1 && fluidChoice != 11) {
           cin >> fluidChoice;
-          if (fluidChoice != (1 | 11)) {
+          if (fluidChoice != 1 && fluidChoice != 11) {
             cout << "Ace can only be 1 or 11 points...";
           } else {
             deck[0].value = fluidChoice;
           }
         }
+        clearScreen();
       }
       // add top card of deck to hand
       add2hand(deck, stack1, 0);
     }
     // calculating value in hand
     playerScore = handValue(stack1);
+    showHand(stack1);
+    cout << "Player Score: " << playerScore << endl;
   }
 }
