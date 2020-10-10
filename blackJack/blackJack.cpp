@@ -421,6 +421,6 @@ int main() {
     playerScore = handValue(stack1);
     showHand(stack1);
     cout << "Player Score: " << playerScore << endl;
-    // random change
+    // random changes
   }
 }
