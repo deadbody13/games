@@ -380,9 +380,14 @@ int main() {
   shuffleDeck();
 
   int playerScore = 0;
+  int dealerScore = 0;
   int fluidChoice;
   char choice;
+  bool playerBreak = false;
+  bool dealerBreak = false;
+  bool playerWin;
 
+  // Player's turn
   // while player's score is 21 or less
   while (playerScore < 22) {
     cout << "Would you like to draw a card? [y/n]" << endl;
@@ -421,6 +426,66 @@ int main() {
     playerScore = handValue(stack1);
     showHand(stack1);
     cout << "Player Score: " << playerScore << endl;
-    // change
+  }
+  if (playerScore > 21) {
+    playerBreak = true;
+    cout << "You broke, you lose!" << endl;
+  } else {
+    cout << "Final score: " << playerScore << endl;
+  }
+  // Dealer's turn
+  // while score is less than 22
+  // while (dealerScore + deck[0].value < 22 | deck[0].fluidValue == true &&
+  // dealerScore < 21)
+  while (dealerScore < 17 && (dealerScore <= playerScore) &&
+         playerBreak == false) {
+    // case for Aces
+    if (deck[0].fluidValue == true) {
+      deck[0].value = (dealerScore < 11) ? 11 : 1;
+    } else {
+      add2hand(deck, stack2, 0);
+    }
+    dealerScore = handValue(stack2);
+    if (dealerScore > 21) {
+      dealerBreak = true;
+    }
+  }
+  clearScreen();
+  cout << "Player: " << endl;
+  showHand(stack1);
+  cout << "Score: " << playerScore << endl;
+  cout << "\n\nDealer: " << endl;
+  showHand(stack2);
+  cout << "score: " << dealerScore << endl;
+
+  // logic for winner
+  cout << "--------------------" << endl;
+  if (playerBreak == false) {
+    playerWin =
+        ((playerScore > dealerScore) | (dealerBreak == true)) ? true : false;
+  } else {
+    playerWin = false;
+  }
+  // outputs
+  // case of player winning
+  if (playerWin == true) {
+    cout << "Player wins!" << endl;
+    if (playerScore > dealerScore) {
+      cout << "-- Player's score is higher" << endl;
+    } else if (dealerBreak == true) {
+      cout << "-- Dealer went over 21" << endl;
+    }
+  }
+  if (playerWin == false) {
+    cout << "Dealer wins!" << endl;
+    if (playerScore < dealerScore) {
+      cout << "-- Dealer's score is higher" << endl;
+    } else if (dealerScore == playerScore) {
+      cout << "-- Both scores are the same\n-- Dealer wins ties" << endl;
+    } else if (playerBreak == true && dealerBreak == true) {
+      cout << "-- Dealer and Player both broke \n--- Dealer wins ties" << endl;
+    } else if (playerBreak == true) {
+      cout << "-- Player went over 21" << endl;
+    }
   }
 }
