@@ -112,6 +112,19 @@ int handValue(vector<Cards> &hand) {
   return total;
 }
 
+float chance(int stackScore) {
+  int margin = 21 - stackScore;
+  int size = deck.size();
+  int count = 0;
+  for (int i = 0; i < size; i++) {
+    if (deck[i].value <= margin) {
+      count++;
+    }
+  }
+  float odds = count / size;
+  return odds;
+}
+
 void add2hand(vector<Cards> &startHand, vector<Cards> &endHand, int card) {
   endHand.push_back(startHand[card]);
   startHand.erase(startHand.begin() + card);
@@ -125,7 +138,7 @@ void clearScreen() {
 void showHand(vector<Cards> &hand) {
   int size = hand.size();
   for (int i = 0; i < size; i++) {
-    cout << hand[i].graphic;
+    cout << hand[i].graphic << endl;
   }
   cout << endl;
 }
@@ -383,6 +396,7 @@ int main() {
   int dealerScore = 0;
   int fluidChoice;
   char choice;
+  float survival;
   bool playerBreak = false;
   bool dealerBreak = false;
   bool playerWin;
@@ -424,8 +438,12 @@ int main() {
     }
     // calculating value in hand
     playerScore = handValue(stack1);
+    // display field
     showHand(stack1);
     cout << "Player Score: " << playerScore << endl;
+    // calculating chance
+    survival = chance(handValue(stack1));
+    cout << "Odds: " << survival << endl;
   }
   if (playerScore > 21) {
     playerBreak = true;

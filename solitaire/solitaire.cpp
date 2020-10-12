@@ -6,18 +6,15 @@ using namespace std;
 class Cards {
 public:
   string name;
-  string topEdge, bottomEdge, graphicTop, graphicMiddle, graphicBottom, graphic;
+  string graphic;
   int value;
   bool fluidValue = false;
   bool color = true;
+  bool hidden = false;
 };
 vector<Cards> deck;
 vector<Cards> stack1, stack2, stack3, stack4, field1, field2, field3, field4,
     field5, field6, field7;
-vector<vector<Cards>> stacks{deck,   stack1, stack2, stack3, stack4, field1,
-                             field2, field3, field4, field5, field6, field7};
-vector<Cards> playerHand;
-vector<Cards> dealerHand;
 
 Cards two1, two2, two3, two4;
 Cards three1, three2, three3, three4;
@@ -34,80 +31,110 @@ Cards king1, king2, king3, king4;
 Cards ace1, ace2, ace3, ace4;
 
 void orderDeck() {
-  while (!stacks[0].empty()) {
-    stacks[0].pop_back();
+  // remove all cards from deck, stacks, and fields
+  while (!deck.empty()) {
+    deck.pop_back();
   }
-  while (!playerHand.empty()) {
-    playerHand.pop_back();
+  while (!stack1.empty()) {
+    stack1.pop_back();
   }
-  while (!dealerHand.empty()) {
-    dealerHand.pop_back();
+  while (!stack2.empty()) {
+    stack2.pop_back();
   }
-  stacks[0].push_back(two1);
-  stacks[0].push_back(two2);
-  stacks[0].push_back(two3);
-  stacks[0].push_back(two4);
-  stacks[0].push_back(three1);
-  stacks[0].push_back(three2);
-  stacks[0].push_back(three3);
-  stacks[0].push_back(three4);
-  stacks[0].push_back(four1);
-  stacks[0].push_back(four2);
-  stacks[0].push_back(four3);
-  stacks[0].push_back(four4);
-  stacks[0].push_back(five1);
-  stacks[0].push_back(five2);
-  stacks[0].push_back(five3);
-  stacks[0].push_back(five4);
-  stacks[0].push_back(six1);
-  stacks[0].push_back(six2);
-  stacks[0].push_back(six3);
-  stacks[0].push_back(six4);
-  stacks[0].push_back(seven1);
-  stacks[0].push_back(seven2);
-  stacks[0].push_back(seven3);
-  stacks[0].push_back(seven4);
-  stacks[0].push_back(eight1);
-  stacks[0].push_back(eight2);
-  stacks[0].push_back(eight3);
-  stacks[0].push_back(eight4);
-  stacks[0].push_back(nine1);
-  stacks[0].push_back(nine2);
-  stacks[0].push_back(nine3);
-  stacks[0].push_back(nine4);
-  stacks[0].push_back(ten1);
-  stacks[0].push_back(ten2);
-  stacks[0].push_back(ten3);
-  stacks[0].push_back(ten4);
-  stacks[0].push_back(jack1);
-  stacks[0].push_back(jack2);
-  stacks[0].push_back(jack3);
-  stacks[0].push_back(jack4);
-  stacks[0].push_back(queen1);
-  stacks[0].push_back(queen2);
-  stacks[0].push_back(queen3);
-  stacks[0].push_back(queen4);
-  stacks[0].push_back(king1);
-  stacks[0].push_back(king2);
-  stacks[0].push_back(king3);
-  stacks[0].push_back(king4);
-  stacks[0].push_back(ace1);
-  stacks[0].push_back(ace2);
-  stacks[0].push_back(ace3);
-  stacks[0].push_back(ace4);
+  while (!stack3.empty()) {
+    stack3.pop_back();
+  }
+  while (!stack4.empty()) {
+    stack4.pop_back();
+  }
+  while (!field1.empty()) {
+    field1.pop_back();
+  }
+  while (!field2.empty()) {
+    field2.pop_back();
+  }
+  while (!field3.empty()) {
+    field3.pop_back();
+  }
+  while (!field4.empty()) {
+    field4.pop_back();
+  }
+  while (!field5.empty()) {
+    field5.pop_back();
+  }
+  while (!field6.empty()) {
+    field6.pop_back();
+  }
+  while (!field7.empty()) {
+    field7.pop_back();
+  }
+  // place all cards in deck
+  deck.push_back(two1);
+  deck.push_back(two2);
+  deck.push_back(two3);
+  deck.push_back(two4);
+  deck.push_back(three1);
+  deck.push_back(three2);
+  deck.push_back(three3);
+  deck.push_back(three4);
+  deck.push_back(four1);
+  deck.push_back(four2);
+  deck.push_back(four3);
+  deck.push_back(four4);
+  deck.push_back(five1);
+  deck.push_back(five2);
+  deck.push_back(five3);
+  deck.push_back(five4);
+  deck.push_back(six1);
+  deck.push_back(six2);
+  deck.push_back(six3);
+  deck.push_back(six4);
+  deck.push_back(seven1);
+  deck.push_back(seven2);
+  deck.push_back(seven3);
+  deck.push_back(seven4);
+  deck.push_back(eight1);
+  deck.push_back(eight2);
+  deck.push_back(eight3);
+  deck.push_back(eight4);
+  deck.push_back(nine1);
+  deck.push_back(nine2);
+  deck.push_back(nine3);
+  deck.push_back(nine4);
+  deck.push_back(ten1);
+  deck.push_back(ten2);
+  deck.push_back(ten3);
+  deck.push_back(ten4);
+  deck.push_back(jack1);
+  deck.push_back(jack2);
+  deck.push_back(jack3);
+  deck.push_back(jack4);
+  deck.push_back(queen1);
+  deck.push_back(queen2);
+  deck.push_back(queen3);
+  deck.push_back(queen4);
+  deck.push_back(king1);
+  deck.push_back(king2);
+  deck.push_back(king3);
+  deck.push_back(king4);
+  deck.push_back(ace1);
+  deck.push_back(ace2);
+  deck.push_back(ace3);
+  deck.push_back(ace4);
 }
 void shuffleDeck() {
   int draw;
   for (int i = 0; i < 1000; i++) {
-    draw = rand() % stacks[0].size();
-    stacks[0].push_back(stacks[0][draw]);
-    stacks[0].erase(stacks[0].begin() + draw);
+    draw = rand() % deck.size();
+    deck.push_back(deck[draw]);
+    deck.erase(deck.begin() + draw);
   }
 }
 
 int handValue(vector<Cards> &hand) {
   int total = 0;
-  for (int i = 0; i < hand.size(); i++) {
+  int size = hand.size();
+  for (int i = 0; i < size; i++) {
     total += hand[i].value;
   }
   return total;
@@ -118,21 +145,120 @@ void add2hand(vector<Cards> &startHand, vector<Cards> &endHand, int card) {
   startHand.erase(startHand.begin() + card);
 }
 
-void showHand(vector<Cards> &hand) {
-  for (int i = 0; i < hand.size(); i++) {
-    cout << hand[i].graphic << " ";
-  }
-}
-
 void clearScreen() {
   for (int i = 0; i < 50; i++) {
-    cout << "\n" << endl;
+    cout << "\n"
+         << "\n";
   }
 }
 
-int randomCard() {
-  int card = rand() % deck.size();
-  return card;
+void dealStack(vector<Cards> &stack, int sizeOfStack) {
+  for (int i = 0; i < sizeOfStack; i++) {
+    deck[0].hidden = (i < sizeOfStack - 1) ? true : false;
+    add2hand(deck, stack, 0);
+  }
+}
+
+void showField() {
+  // finding largest field
+  cout << "Calculating field size...\n";
+  int field1Size = field1.size();
+  int field2Size = field2.size();
+  int field3Size = field3.size();
+  int field4Size = field4.size();
+  int field5Size = field5.size();
+  int field6Size = field6.size();
+  int field7Size = field7.size();
+
+  int size = field1Size;
+  if (field2Size > size)
+    size = field2Size;
+  if (field3Size > size)
+    size = field3Size;
+  if (field4Size > size)
+    size = field4Size;
+  if (field5Size > size)
+    size = field5Size;
+  if (field6Size > size)
+    size = field6Size;
+  if (field7Size > size)
+    size = field7Size;
+
+  string output;
+  string hiddenCard = "[  o  ]";
+  string blank = "        ";
+
+  // show deck and stacks
+  string stack1Graphic =
+      (stack1.size() < 1) ? hiddenCard : stack1[stack1.size() - 1].graphic;
+  string stack2Graphic =
+      (stack2.size() < 1) ? hiddenCard : stack2[stack2.size() - 1].graphic;
+  string stack3Graphic =
+      (stack3.size() < 1) ? hiddenCard : stack3[stack3.size() - 1].graphic;
+  string stack4Graphic =
+      (stack4.size() < 1) ? hiddenCard : stack4[stack4.size() - 1].graphic;
+  cout << "Outputting field\n";
+  cout << deck[0].graphic << blank << blank << " " << stack1Graphic << " "
+       << stack2Graphic << " " << stack3Graphic << " " << stack4Graphic << "\n";
+  cout << "\n";
+  cout << "\n";
+
+  // show fields
+  // reviels top card
+  for (int i = 0; i < size; i++) {
+    if (i == field1Size - 1)
+      field1[i].hidden = false;
+    if (i == field2Size - 1)
+      field2[i].hidden = false;
+    if (i == field3Size - 1)
+      field3[i].hidden = false;
+    if (i == field4Size - 1)
+      field4[i].hidden = false;
+    if (i == field5Size - 1)
+      field5[i].hidden = false;
+    if (i == field6Size - 1)
+      field6[i].hidden = false;
+    if (i == field7Size - 1)
+      field7[i].hidden = false;
+
+    // output fields
+    if (i < field1Size) {
+      output = (field1[i].hidden == false) ? field1[i].graphic : hiddenCard;
+      cout << output << " ";
+    } else
+      cout << blank;
+    if (i < field2Size) {
+      output = (field2[i].hidden == false) ? field2[i].graphic : hiddenCard;
+      cout << output << " ";
+    } else
+      cout << blank;
+    if (i < field3Size) {
+      output = (field3[i].hidden == false) ? field3[i].graphic : hiddenCard;
+      cout << output << " ";
+    } else
+      cout << blank;
+    if (i < field4Size) {
+      output = (field4[i].hidden == false) ? field4[i].graphic : hiddenCard;
+      cout << output << " ";
+    } else
+      cout << blank;
+    if (i < field5Size) {
+      output = (field5[i].hidden == false) ? field5[i].graphic : hiddenCard;
+      cout << output << " ";
+    } else
+      cout << blank;
+    if (i < field6Size) {
+      output = (field6[i].hidden == false) ? field6[i].graphic : hiddenCard;
+      cout << output << " ";
+    } else
+      cout << blank;
+    if (i < field7Size) {
+      output = (field7[i].hidden == false) ? field7[i].graphic : hiddenCard;
+      cout << output << " ";
+    } else
+      cout << blank;
+    cout << endl;
+  }
 }
 
 int main() {
@@ -356,57 +482,44 @@ int main() {
   king4.graphic = "[K   ♢]";
 
   ace1.name = "Ace of Spades";
+  ace1.fluidValue = true;
   ace1.color = false;
-  ace1.value = 10;
+  ace1.value = 11;
   ace1.graphic = "[A   ♠]";
 
   ace2.name = "Ace of Hearts";
-  ace2.value = 10;
+  ace2.fluidValue = true;
+  ace2.value = 11;
   ace2.graphic = "[A   ♡]";
 
   ace3.name = "Ace of Clubs";
+  ace3.fluidValue = true;
   ace3.color = false;
-  ace3.value = 10;
+  ace3.value = 11;
   ace3.graphic = "[A   ♣]";
 
   ace4.name = "Ace of Diamonds";
-  ace4.value = 10;
+  ace4.fluidValue = true;
+  ace4.value = 11;
   ace4.graphic = "[A   ♢]";
-
+  clearScreen();
   orderDeck();
   shuffleDeck();
-  clearScreen();
 
-  string blank = "       ";
+  // dealing out cards
+  dealStack(field1, 1);
+  dealStack(field2, 2);
+  dealStack(field3, 3);
+  dealStack(field4, 4);
+  dealStack(field5, 5);
+  dealStack(field6, 6);
+  dealStack(field7, 7);
 
-  add2hand(stacks[0], stacks[1], 0);
-  add2hand(stacks[0], stacks[2], 0);
-  add2hand(stacks[0], stacks[2], 0);
-  add2hand(stacks[0], stacks[2], 0);
-  add2hand(stacks[0], stacks[3], 0);
-  add2hand(stacks[0], stacks[4], 0);
-  add2hand(stacks[0], stacks[4], 0);
-
-  int count1 = stacks[1].size();
-  if (stacks[2].size() > count1)
-    count1 = stacks[2].size();
-  if (stacks[3].size() > count1)
-    count1 = stacks[3].size();
-  if (stacks[4].size() > count1)
-    count1 = stacks[4].size();
-
-  int len;
-  string placeholder;
-  cout << stacks[0][0].graphic <<endl;
-  for (int i = 0; i < count1-1; i++) {
-    for (int j = 1; j < 5; j++) {
-      if (i < stacks[i].size())
-        cout << stacks[i][j].graphic;
-      else
-        cout << blank;
-    }
-    cout << endl;
-  }
-
-  cout << endl;
+  showField();
+  int choice;
+  cin >> choice;
+  // put this into a function moveCard(int startHand, int endHand, int numberOfCardsMoved)
+  int element = field2.size()-1;
+  add2hand(field2, field1, element);
+  showField();
 }
