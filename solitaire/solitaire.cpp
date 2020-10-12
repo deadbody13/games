@@ -15,6 +15,9 @@ public:
 vector<Cards> deck;
 vector<Cards> stack1, stack2, stack3, stack4, field1, field2, field3, field4,
     field5, field6, field7;
+vector<Cards> *fields[11] = {&field1, &field2, &field3, &field4,
+                            &field5, &field6, &field7, &stack1,
+                            &stack2, &stack3, &stack4};
 
 Cards two1, two2, two3, two4;
 Cards three1, three2, three3, three4;
@@ -122,6 +125,7 @@ void orderDeck() {
   deck.push_back(ace3);
   deck.push_back(ace4);
 }
+
 void shuffleDeck() {
   int draw;
   for (int i = 0; i < 1000; i++) {
@@ -131,20 +135,21 @@ void shuffleDeck() {
   }
 }
 
-int handValue(vector<Cards> &hand) {
-  int total = 0;
-  int size = hand.size();
-  for (int i = 0; i < size; i++) {
-    total += hand[i].value;
-  }
-  return total;
-}
-
+// takes card of specified element <card> of stack <startHand> and pushes it to
+// the back of another stack <endHand>
 void add2hand(vector<Cards> &startHand, vector<Cards> &endHand, int card) {
   endHand.push_back(startHand[card]);
   startHand.erase(startHand.begin() + card);
 }
 
+void add2Stack(int startHand, int endHand, int howMany) {
+    for (int i=0; i<howMany; i++) {
+        fields[endHand] -> push_back(fields[startHand]->at(fields[startHand]->size()-howMany+i));
+        fields[startHand] -> erase(fields[startHand]->begin() + fields[startHand]->size()-howMany+i);
+    }
+}
+
+// just outputs a bunch of blanks lines
 void clearScreen() {
   for (int i = 0; i < 50; i++) {
     cout << "\n"
@@ -152,6 +157,8 @@ void clearScreen() {
   }
 }
 
+// sends number of cards <sizeOfStack> from the bottom of the deck to the end of
+// designated stack <stack>
 void dealStack(vector<Cards> &stack, int sizeOfStack) {
   for (int i = 0; i < sizeOfStack; i++) {
     deck[0].hidden = (i < sizeOfStack - 1) ? true : false;
@@ -159,6 +166,7 @@ void dealStack(vector<Cards> &stack, int sizeOfStack) {
   }
 }
 
+// clears field and outputs all cards
 void showField() {
   // finding largest field
   cout << "Calculating field size...\n";
@@ -189,6 +197,8 @@ void showField() {
   string blank = "        ";
 
   // show deck and stacks
+  // if card is hidden, outputs hiddenCard string, else outputs the card's
+  // graphic
   string stack1Graphic =
       (stack1.size() < 1) ? hiddenCard : stack1[stack1.size() - 1].graphic;
   string stack2Graphic =
@@ -198,6 +208,7 @@ void showField() {
   string stack4Graphic =
       (stack4.size() < 1) ? hiddenCard : stack4[stack4.size() - 1].graphic;
   cout << "Outputting field\n";
+  cout << "Deck " << " " << blank << " " << blank << "   " << "[7]    " << " " << "[8]    " << " " << "[9]    " << "[10]    \n";
   cout << deck[0].graphic << blank << blank << " " << stack1Graphic << " "
        << stack2Graphic << " " << stack3Graphic << " " << stack4Graphic << "\n";
   cout << "\n";
@@ -515,11 +526,17 @@ int main() {
   dealStack(field6, 6);
   dealStack(field7, 7);
 
+  clearScreen();
   showField();
-  int choice;
-  cin >> choice;
-  // put this into a function moveCard(int startHand, int endHand, int numberOfCardsMoved)
-  int element = field2.size()-1;
-  add2hand(field2, field1, element);
-  showField();
+
+  int startHand;
+  int endHand;
+  int howMany;
+  while (1) {
+    cin >> startHand;
+    cin >> endHand;
+    cin >> howMany;
+    add2Stack(startHand, endHand, howMany);
+    showField();
+  }
 }
