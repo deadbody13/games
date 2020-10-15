@@ -16,8 +16,8 @@ vector<Cards> deck;
 vector<Cards> stack1, stack2, stack3, stack4, field1, field2, field3, field4,
     field5, field6, field7;
 vector<Cards> *fields[11] = {&field1, &field2, &field3, &field4,
-                            &field5, &field6, &field7, &stack1,
-                            &stack2, &stack3, &stack4};
+                             &field5, &field6, &field7, &stack1,
+                             &stack2, &stack3, &stack4};
 
 Cards two1, two2, two3, two4;
 Cards three1, three2, three3, three4;
@@ -143,10 +143,12 @@ void add2hand(vector<Cards> &startHand, vector<Cards> &endHand, int card) {
 }
 
 void add2Stack(int startHand, int endHand, int howMany) {
-    for (int i=0; i<howMany; i++) {
-        fields[endHand] -> push_back(fields[startHand]->at(fields[startHand]->size()-howMany+i));
-        fields[startHand] -> erase(fields[startHand]->begin() + fields[startHand]->size()-howMany+i);
-    }
+  for (int i = 0; i < howMany; i++) {
+    fields[endHand]->push_back(
+        fields[startHand]->at(fields[startHand]->size() - howMany + i));
+    fields[startHand]->erase(fields[startHand]->begin() +
+                             fields[startHand]->size() - howMany + i);
+  }
 }
 
 // just outputs a bunch of blanks lines
@@ -166,10 +168,14 @@ void dealStack(vector<Cards> &stack, int sizeOfStack) {
   }
 }
 
+void draw() {
+  deck.push_back(deck[0]);
+  deck.erase(deck.begin());
+}
+
 // clears field and outputs all cards
 void showField() {
   // finding largest field
-  cout << "Calculating field size...\n";
   int field1Size = field1.size();
   int field2Size = field2.size();
   int field3Size = field3.size();
@@ -207,8 +213,15 @@ void showField() {
       (stack3.size() < 1) ? hiddenCard : stack3[stack3.size() - 1].graphic;
   string stack4Graphic =
       (stack4.size() < 1) ? hiddenCard : stack4[stack4.size() - 1].graphic;
-  cout << "Outputting field\n";
-  cout << "Deck " << " " << blank << " " << blank << "   " << "[7]    " << " " << "[8]    " << " " << "[9]    " << "[10]    \n";
+
+  cout << "Deck "
+       << " " << blank << " " << blank << "   "
+       << "[7]    "
+       << " "
+       << "[8]    "
+       << " "
+       << "[9]    "
+       << "[10]    \n";
   cout << deck[0].graphic << blank << blank << " " << stack1Graphic << " "
        << stack2Graphic << " " << stack3Graphic << " " << stack4Graphic << "\n";
   cout << "\n";
@@ -216,6 +229,19 @@ void showField() {
 
   // show fields
   // reviels top card
+  cout << "  [0]    "
+       << " "
+       << "[1]    "
+       << " "
+       << "[2]    "
+       << " "
+       << "[3]    "
+       << " "
+       << "[4]    "
+       << " "
+       << "[5]    "
+       << " "
+       << "[6]   \n";
   for (int i = 0; i < size; i++) {
     if (i == field1Size - 1)
       field1[i].hidden = false;
@@ -534,9 +560,37 @@ int main() {
   int howMany;
   while (1) {
     cin >> startHand;
-    cin >> endHand;
-    cin >> howMany;
-    add2Stack(startHand, endHand, howMany);
+    // draw card
+    if (startHand == 12) {
+      draw();
+      cout << endl;
+    }
+    // moving deck to field or stack
+    else if (startHand == 11) {
+      cout << "11 received\n";
+      cin >> endHand;
+      // if there's only one card left in deck
+      if (endHand < 11 && endHand >= 0) {
+        fields[endHand]->push_back(deck[0]);
+        deck.erase(deck.begin());
+        cout << endl;
+      }
+    }
+    // moving from field to field or stack
+    else if (startHand < 11 && startHand >= 0) {
+      cin >> endHand;
+      // acceptable
+      if (endHand < 11 && endHand >= 0 && endHand != startHand) {
+        cin >> howMany;
+        int size = fields[startHand]->size();
+        if (howMany <= size) {
+          add2Stack(startHand, endHand, howMany);
+          cout << endl;
+        }
+      }
+    }
+
+    clearScreen();
     showField();
   }
 }
